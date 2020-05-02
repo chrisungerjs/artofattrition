@@ -6,15 +6,13 @@ const global = {
     cardsInShop: [],
     cardsInPool: [],
     backgroundClasses: [
-        'orc-fortress',
-        'troll-city',
         'castle',
+        'falls',
         'guincho',
-        'flying-fortress',
-        'imeall',
-        'hidden-realm',
+        'orc-fortress',
+        'realm',
+        'troll-city',
     ],
-    
 }
 
 //////////////////////////
@@ -46,13 +44,24 @@ class Card {
 const func = {
     // press start to begin
     startGame() {
-        this.generatePool();
-        this.shuffle(global.cardsInPool);
-        this.makeCardElements(); // for both players
+        func.generateBackground();
+        func.hideTitles();
+        func.generatePool(); 
+        func.shuffle(global.cardsInPool);
+        func.makeCardElements(); // for both players
+    },
+    // generate a random background image
+    generateBackground() {
+        const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
+        $('html').attr('class', global.backgroundClasses[randomIndex]);
     },
     // generate the starting card pool
     generatePool() {
 
+    },
+    hideTitles() {
+        $('.hero-text').toggleClass('hidden');
+        $('.play-btn').toggleClass('hidden');
     },
     // generate card DOM elements
     makeCardElements(cardArray) {    
@@ -81,6 +90,7 @@ const func = {
             arr[randomIndex] = temp;
         }
     },
+    // start buy round
     buyRound(qty) {
         // shuffle the card pool
         func.shuffle(global.cardsInPool);
@@ -95,18 +105,21 @@ const func = {
         // make your creatures clickable so you can sell them if you want
         // 
     },
-
+    // combat phase
     combat() {
     },
-
+    // make a random number from a range
+    randomNumberBetween(min, max) {
+        // max is *not* inclusive - low is inclusive
+        return Math.floor(Math.random() * (max - min) + min);
+    },
 }
-
 //////////////////////////
 // Event Handlers
 //////////////////////////
 
 const handle = {
-
+    playbutton: $('.play-btn').on('click', func.startGame)
 }
 
 //////////////////////////

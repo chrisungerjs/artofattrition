@@ -54,14 +54,14 @@ html {
 .castle {
     background-image: var(--dimGradient), url(../img/maps/castle.png);
 }
-.orc-fortress {
-    background-image: var(--dimGradient), url(../img/maps/orc-fortress.png);
-}
 .falls {
     background-image: var(--dimGradient), url(../img/maps/falls.png);
 }
 .guincho {
     background-image: var(--dimGradient), url(../img/maps/guincho.png);
+}
+.orc-fortress {
+    background-image: var(--dimGradient), url(../img/maps/orc-fortress.png);
 }
 .realm {
     background-image: var(--dimGradient), url(../img/maps/realm.png);
@@ -153,6 +153,6 @@ html {
 
 
 /* hide class for toggles */
-.hide {
+.hidden {
     display: none;
 }
