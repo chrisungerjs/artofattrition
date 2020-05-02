@@ -1,5 +1,6 @@
 /* || Imports */
 @import url('normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 /* || Variables */
 :root {
     /* colors */
@@ -7,8 +8,11 @@
     --backColor: white;
     --accent: #ffc600;
     /* fonts */
-    --titleFont: Arial;
-    --textFont: 'Times New Roman';
+    --titleFont: 'Cinzel Decorative', cursive;
+    --textFont: 'Open Sans', sans-serif;
+    /* gradients */
+    --darkGradient: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    --dimGradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 /* || Reset */
 *,
@@ -27,3 +31,128 @@ body {
     box-sizing: border-box;
 }
 /* || Body Styles */
+
+/* //////////////// */
+/* Game Backgrounds */
+/* //////////////// */
+
+/* Start Screen */
+html {
+    /* background fill image */
+    background-image: var(--dimGradient) ,url(../img/start/Wizard\ Battle.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+    /* position for hero text */
+    position: relative;
+}
+
+/* Game Board Classes */
+.castle {
+    background-image: var(--dimGradient), url(../img/maps/castle.png);
+}
+.orc-fortress {
+    background-image: var(--dimGradient), url(../img/maps/orc-fortress.png);
+}
+.falls {
+    background-image: var(--dimGradient), url(../img/maps/falls.png);
+}
+.guincho {
+    background-image: var(--dimGradient), url(../img/maps/guincho.png);
+}
+.realm {
+    background-image: var(--dimGradient), url(../img/maps/realm.png);
+}
+.troll-city {
+    background-image: var(--dimGradient), url(../img/maps/troll-city.png);
+}
+
+
+
+/* Title Styles */
+
+.hero-text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 32%;
+    transform: translate(-40%, -50%);
+}
+
+.title {
+    font-family: var(--titleFont);
+    font-weight: 900;
+    font-size: 8vw;
+    text-align: left;
+    line-height: 7vh;
+    text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
+    margin-bottom: 3rem;
+}
+
+.tagline {
+    font-family: var(--textFont);
+    font-weight: 400;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: left;
+}
+
+
+
+
+
+
+
+/* Footer Styles */
+
+.footer {
+    position: absolute;
+    bottom: .5rem;
+    right: .5rem;
+    font-family: var(--textFont);
+    color: white;
+    font-size: .6rem;
+}
+
+
+/* link Styles */
+.link {
+    text-decoration: none;
+    color: var(--accent);
+}
+.link:hover {
+    filter: brightness(60%);
+}
+.link:active {
+    filter: brightness(115%);
+}
+
+
+/* Social Links */
+.social-links {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+}
+
+
+
+
+.play-btn {
+    font-size: 12vw;
+    position: absolute;
+    top: 50%;
+    right: 18%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+/* hide class for toggles */
+.hide {
+    display: none;
+}
