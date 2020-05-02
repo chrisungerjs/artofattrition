@@ -1,0 +1,29 @@
+/* || Imports */
+@import url('normalize.css');
+/* || Variables */
+:root {
+    /* colors */
+    --mainColor: black;
+    --backColor: white;
+    --accent: #ffc600;
+    /* fonts */
+    --titleFont: Arial;
+    --textFont: 'Times New Roman';
+}
+/* || Reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    text-align: center;
+    /* outline: 3px solid black; */
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    box-sizing: border-box;
+}
+/* || Body Styles */
