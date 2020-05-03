@@ -55,15 +55,16 @@ const func = {
         const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
         $('html').attr('class', global.backgroundClasses[randomIndex]);
     },
-    // generate the starting card pool
+    // generate the starting card pool - need inputs for this
     generatePool() {
 
     },
+    // hide the title and play button - might need to make this modular
     hideTitles() {
         $('.hero-text').toggleClass('hidden');
         $('.play-btn').toggleClass('hidden');
     },
-    // generate card DOM elements
+    // generate card DOM elements - need to finish
     makeCardElements(cardArray) {    
         for (card in cardArray) {
             $('<div>').addClass('card');
@@ -125,3 +126,5 @@ const handle = {
 //////////////////////////
 // App Logic
 //////////////////////////
+
+
