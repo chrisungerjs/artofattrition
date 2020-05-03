@@ -149,28 +149,32 @@ const func = {
 
         for (card in cardArray) {
 
-            const tierStars = '';
+            let tierStars = '';
 
-            for (let i = 0; i < card.tier; i++){
+            for (let i = 0; i < cardArray[card].tier; i++){
 
                 tierStars += '<i class="fas fa-star">';
 
             }
-
-            const cardElement = $('<div>').addClass('card').html(`
+            console.log(tierStars)
+            // console.log(cardArray[card]);
             
+            // ${tierStars}
+
+            // <img src="img/tier 1/Conscript.png" class="card-image-png ${cardArray[card].rarity}" title="" alt="">
+ 
+            const cardElement = $('<div>').addClass('card').html(`
+
                 <div class="card-container">
                     <div class="card-image-bg">
-                        <img src="img/tier 1/Conscript.png" class="card-image-png ${card.rarity}" title="" alt="">
                     </div>
                     <div class="card-stat-container">
                         <div class="card-tier">
-                            ${tierStars}
                         </div>
                         <div class="power-health">
-                            <div class="card-power">${card.power}</div>
+                            <div class="card-power">${cardArray[card].power}</div>
                             <div class="slash">/</div>
-                            <div class="card-health">${card.health}</div>
+                            <div class="card-health">${cardArray[card].health}</div>
                         </div>
                     </div>
                 </div>
@@ -179,6 +183,7 @@ const func = {
 
             // add listener
             cardElement.on('click', () => console.log(`you bought a card`))
+            // this listener is going to trigger the buyCard function
             
             // append to the buy row
             $('.buy').append(cardElement);
