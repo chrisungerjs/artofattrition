@@ -126,7 +126,11 @@ html {
 
 
 
+
+
+
 /* link Styles */
+
 .link {
     text-decoration: none;
     color: var(--accent);
@@ -144,6 +148,7 @@ html {
 
 
 /* Social Links */
+
 .social-links {
     position: absolute;
     top: 1rem;
@@ -159,6 +164,11 @@ html {
 
 
 
+
+
+
+/* Play Button */
+
 .play-btn {
     color: white;
     font-size: 12rem;
@@ -170,9 +180,39 @@ html {
 
 
 
-/* hide class for toggles */
-.hidden {
-    display: none;
+
+
+
+
+/* Card Row Styles */
+
+.card-row {
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* border: 3px solid gold */
+}
+
+.buy {
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player-1 {
+    height: 30%;
+    bottom: 10%;
+    transform: translateX(-50%);
+}
+
+.player-2 {
+    height: 30%;
+    top: 10%;
+    transform: translateX(-50%);
 }
 
 
@@ -183,3 +223,8 @@ html {
 
 
 
+/* hide class for toggles */
+
+.hidden {
+    display: none;
+}

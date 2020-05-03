@@ -55,7 +55,10 @@ const func = {
         func.generateBackground();
         func.hideTitles();
 
-        func.buyRound(1);
+
+        
+
+        func.startBuyRound(1);
 
         func.makeCardElements(); // for both players
 
@@ -181,7 +184,7 @@ const func = {
     },
 
     // start buy round // need to finish
-    buyRound(tier) {
+    startBuyRound(tier) {
 
         // generate the card pool - pass the player's current tier
         func.generatePool(tier);
@@ -195,7 +198,6 @@ const func = {
         // add the appropriate amount of cards to the shop
         for (let i = 0; i < shopQty; i++) {
 
-            console.log()
             global.cardsInShop.push(global.cardsInPool.pop());
 
         }
@@ -209,7 +211,7 @@ const func = {
     },
 
     // combat phase // need to finish
-    combat() {
+    startCombat() {
     },
 
     // make a random number from a range
@@ -228,7 +230,6 @@ const func = {
     const handle = {
 
         playbutton: $('.play-btn').on('click', func.startGame),
-
 
     }
 
