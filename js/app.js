@@ -3,6 +3,7 @@
 //////////////////////////
 
 const global = {
+
     cardsInShop: [],
     cardsInPool: [],
     backgroundClasses: [
@@ -13,6 +14,7 @@ const global = {
         'realm',
         'troll-city',
     ],
+
 }
 
 //////////////////////////
@@ -20,20 +22,24 @@ const global = {
 //////////////////////////
 
 class Player {
-    constructor () {
-        this.name = null;
+    constructor (name) {
+
+        this.name = name;
         this.health = 20;
         this.currentTier = 1;
         this.cardsInPlay = [];
+
     }
 }
 
 class Card {
     constructor (tier, rarity, power, health) {
+
         this.tier = tier;
         this.rarity = rarity;
         this.power = power;
         this.health = health;
+
     }
 }
 
@@ -48,9 +54,13 @@ const func = {
 
         func.generateBackground();
         func.hideTitles();
-        func.generatePool(1); 
-        func.shuffle(global.cardsInPool);
+
+        func.buyRound(1);
+
         func.makeCardElements(); // for both players
+
+
+
 
     },
 
@@ -112,9 +122,6 @@ const func = {
 
         }
 
-        console.log(global.cardsInPool); //////// 
-
-        
     },
 
     // generate card object
@@ -122,50 +129,77 @@ const func = {
         global.cardsInPool.push(new Card(tier, rarity, power, health));
     },
 
-    // hide the title and play button - might need to make this modular
+    // hide the title, play button, and social links
     hideTitles() {
 
         $('.hero-text').toggleClass('hidden');
         $('.play-btn').toggleClass('hidden');
+        $('.social-links').toggleClass('hidden');
 
     },
 
     // generate card DOM elements - need to finish
     makeCardElements(cardArray) {    
+
         for (card in cardArray) {
-            $('<div>').addClass('card');
+
+            $('<div>').addClass('card').html(``);
             // need to wireframe/design the dom cards
+
         }
     },
 
     // shuffle cards
     shuffle(arr) {
+
         // Random Number Function
         const randomNumber = (arrLen) => Math.floor(Math.random() * arrLen);
+
         // grab the index of the last array element
         let lastIndex = arr.length - 1;
+
         // initialize a temporary variable to hold the numbers as we swap
         let temp = 0;
+
         // loop through the array backwards from the end, ignoring index 0
         for (let i = lastIndex; i > 0; i--) {
+
             // temporarily store the current index's value
             temp = arr[i];
+
             // find a random index between the current index and index 1
             randomIndex = randomNumber(i)
+
             // set the current index's value to the value of the random index
             arr[i] = arr[randomIndex];
+
             // set that random index's value to the current index's value, which we stored in temp
             arr[randomIndex] = temp;
+
         }
+
     },
-    // start buy round
-    buyRound(qty) {
+
+    // start buy round // need to finish
+    buyRound(tier) {
+
+        // generate the card pool - pass the player's current tier
+        func.generatePool(tier);
+
         // shuffle the card pool
         func.shuffle(global.cardsInPool);
+
+        // set the quantity of cards to appear in the shop
+        const shopQty = tier + 2;
+
         // add the appropriate amount of cards to the shop
-        for (let i = 0; i < qty; i++) {
+        for (let i = 0; i < shopQty; i++) {
+
+            console.log()
             global.cardsInShop.push(global.cardsInPool.pop());
+
         }
+        console.log(global.cardsInShop);
         // loop that makes dom elements for the cards
         // make listeners too
 
@@ -173,23 +207,35 @@ const func = {
         // make your creatures clickable so you can sell them if you want
         // 
     },
-    // combat phase
+
+    // combat phase // need to finish
     combat() {
     },
+
     // make a random number from a range
     randomNumberBetween(min, max) {
+
         // max is *not* inclusive - low is inclusive
         return Math.floor(Math.random() * (max - min) + min);
+
     },
+
 }
 //////////////////////////
 // Event Handlers
 //////////////////////////
+
     const handle = {
+
         playbutton: $('.play-btn').on('click', func.startGame),
+
+
     }
+
 //////////////////////////
 // App Logic
 //////////////////////////
 
 
+const player1 = new Player('Player 1');
+const player2 = new Player('Player 2');
