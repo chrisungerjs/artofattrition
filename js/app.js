@@ -55,12 +55,15 @@ const func = {
         func.generateBackground();
         func.hideTitles();
 
+        // determine who goes first and store - global
 
-        
+        func.startBuyRound(1); // for the first player
 
-        func.startBuyRound(1);
+        func.makeCardElements(); // should probably be inside startBuyRound
+        // I need to call startBuyRound with the current player's tier
+        // maybe an "active player" toggle to tell the buy cards function where to put the cards from the store
+        // attack listeners to card elements and callback this function
 
-        func.makeCardElements(); // for both players
 
 
 
@@ -75,7 +78,7 @@ const func = {
 
     },
 
-    // generate the starting card pool - need inputs for this
+    // generate the starting card pool
     generatePool(tier) { // I need to pass tier so I can leave it open to other players classes
 
         // variables
@@ -141,13 +144,44 @@ const func = {
 
     },
 
-    // generate card DOM elements - need to finish
+    // generate card DOM elements - need to finish designing cards
     makeCardElements(cardArray) {    
 
         for (card in cardArray) {
 
-            $('<div>').addClass('card').html(``);
-            // need to wireframe/design the dom cards
+            const tierStars = '';
+
+            for (let i = 0; i < card.tier; i++){
+
+                tierStars += '<i class="fas fa-star">';
+
+            }
+
+            const cardElement = $('<div>').addClass('card').html(`
+            
+                <div class="card-container">
+                    <div class="card-image-bg">
+                        <img src="img/tier 1/Conscript.png" class="card-image-png ${card.rarity}" title="" alt="">
+                    </div>
+                    <div class="card-stat-container">
+                        <div class="card-tier">
+                            ${tierStars}
+                        </div>
+                        <div class="power-health">
+                            <div class="card-power">${card.power}</div>
+                            <div class="slash">/</div>
+                            <div class="card-health">${card.health}</div>
+                        </div>
+                    </div>
+                </div>
+            
+            `);
+
+            // add listener
+            cardElement.on('click', () => console.log(`you bought a card`))
+            
+            // append to the buy row
+            $('.buy').append(cardElement);
 
         }
     },
@@ -186,7 +220,12 @@ const func = {
     // start buy round // need to finish
     startBuyRound(tier) {
 
-        // generate the card pool - pass the player's current tier
+        $('.buy').toggleClass('hidden');
+
+        // empty the current pool
+        global.cardsInPool = [];
+
+        // generate the new card pool - pass the player's current tier
         func.generatePool(tier);
 
         // shuffle the card pool
@@ -201,13 +240,25 @@ const func = {
             global.cardsInShop.push(global.cardsInPool.pop());
 
         }
-        console.log(global.cardsInShop);
-        // loop that makes dom elements for the cards
-        // make listeners too
+        
+        // make elements for each of the cards in the shop
+        func.makeCardElements(global.cardsInShop);
 
+
+        // make listeners too
+        
+        // 
 
         // make your creatures clickable so you can sell them if you want
-        // 
+        // later
+
+
+        for (cards in global.cardsInPool) {
+
+        }
+
+
+
     },
 
     // combat phase // need to finish

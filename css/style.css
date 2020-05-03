@@ -1,7 +1,8 @@
-/* || Imports */
+/* Imports */
 @import url('normalize.css');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
-/* || Variables */
+
+/* Variables */
 :root {
     /* colors */
     --mainColor: black;
@@ -14,7 +15,8 @@
     --darkGradient: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     --dimGradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
-/* || Reset */
+
+/* Reset */
 *,
 *::after,
 *::before {
@@ -30,11 +32,11 @@ html {
 body {
     box-sizing: border-box;
 }
-/* || Body Styles */
 
-/* //////////////// */
+/* Body Styles */
+
+
 /* Game Backgrounds */
-/* //////////////// */
 
 /* Start Screen */
 html {
@@ -193,6 +195,7 @@ html {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    transform: translateX(-50%);
     /* border: 3px solid gold */
 }
 
@@ -200,21 +203,18 @@ html {
     height: 50%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 }
 
 .player-1 {
     height: 30%;
     bottom: 10%;
-    transform: translateX(-50%);
 }
 
 .player-2 {
     height: 30%;
     top: 10%;
-    transform: translateX(-50%);
 }
-
 
 
 
@@ -227,4 +227,52 @@ html {
 
 .hidden {
     display: none;
+}
+
+
+
+
+
+
+
+
+
+/* Card Styles */
+
+.card-container {
+    border: 1px solid black;
+}
+
+.card-container {
+    width: 5rem;
+    border-radius: .25rem; 
+}
+
+.card-image-bg {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('Conscript.png')
+}
+
+.card-image-png {
+    width: 100%;
+}
+
+.card-stat-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: .25rem;
+    border-bottom-left-radius: .125rem;
+    border-bottom-right-radius: .125rem;
+}
+
+.card-tier {
+    color: #ffc600;
+}
+
+.power-health div {
+    display: inline;
+    text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
 }
