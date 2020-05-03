@@ -21,7 +21,7 @@ const global = {
 
 class Player {
     constructor () {
-        this.name = 0;
+        this.name = null;
         this.health = 20;
         this.currentTier = 1;
         this.cardsInPlay = [];
@@ -29,11 +29,11 @@ class Player {
 }
 
 class Card {
-    constructor (name, power, health, img) {
-        this.name = name;
+    constructor (tier, rarity, power, health) {
+        this.tier = tier;
+        this.rarity = rarity;
         this.power = power;
         this.health = health;
-        this.img = img;
     }
 }
 
@@ -42,28 +42,94 @@ class Card {
 //////////////////////////
 
 const func = {
+
     // press start to begin
     startGame() {
+
         func.generateBackground();
         func.hideTitles();
-        func.generatePool(); 
+        func.generatePool(1); 
         func.shuffle(global.cardsInPool);
         func.makeCardElements(); // for both players
-    },
-    // generate a random background image
-    generateBackground() {
-        const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
-        $('html').attr('class', global.backgroundClasses[randomIndex]);
-    },
-    // generate the starting card pool - need inputs for this
-    generatePool() {
 
     },
+
+    // generate a random background image
+    generateBackground() {
+
+        const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
+        $('html').attr('class', global.backgroundClasses[randomIndex]);
+
+    },
+
+    // generate the starting card pool - need inputs for this
+    generatePool(tier) { // I need to pass tier so I can leave it open to other players classes
+
+        // variables
+        const totalCommons = 10;
+        const totalUncommons = 5;
+        const totalRares = 1;
+        
+        // make commons
+        for (let i = 0; i < totalCommons; i++) {
+
+            const rarity = 'common';
+
+            // common power and health are equal to tier
+            const power = tier;
+            const health = tier;
+
+            // make cards and push to pool
+            // pass (tier, rarity, power, health)
+            func.generateCard(tier, rarity, power, health) 
+
+        }
+
+        // make uncommons
+        for (let i = 0; i < totalUncommons; i++) {
+
+            const rarity = 'uncommon';
+
+            // uncommons have either +1 power OR +1 health
+            // 
+            const power = tier + func.randomNumberBetween(0,2);
+            const health = tier + (power > tier ? 0 : 1);
+
+            func.generateCard(tier, rarity, power, health);
+
+        }
+
+        // make rares
+        for (let i = 0; i < totalRares; i++) {
+
+            const rarity = 'rare';
+
+            // rares have +1 power AND +1 health
+            const power = tier + 1;
+            const health = tier + 1;
+
+            func.generateCard(tier, rarity, power, health);
+
+        }
+
+        console.log(global.cardsInPool); //////// 
+
+        
+    },
+
+    // generate card object
+    generateCard(tier, rarity, power, health) {
+        global.cardsInPool.push(new Card(tier, rarity, power, health));
+    },
+
     // hide the title and play button - might need to make this modular
     hideTitles() {
+
         $('.hero-text').toggleClass('hidden');
         $('.play-btn').toggleClass('hidden');
+
     },
+
     // generate card DOM elements - need to finish
     makeCardElements(cardArray) {    
         for (card in cardArray) {
@@ -71,6 +137,7 @@ const func = {
             // need to wireframe/design the dom cards
         }
     },
+
     // shuffle cards
     shuffle(arr) {
         // Random Number Function
@@ -118,11 +185,9 @@ const func = {
 //////////////////////////
 // Event Handlers
 //////////////////////////
-
-const handle = {
-    playbutton: $('.play-btn').on('click', func.startGame)
-}
-
+    const handle = {
+        playbutton: $('.play-btn').on('click', func.startGame),
+    }
 //////////////////////////
 // App Logic
 //////////////////////////

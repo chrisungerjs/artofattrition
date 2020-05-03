@@ -72,6 +72,10 @@ html {
 
 
 
+
+
+
+
 /* Title Styles */
 
 .hero-text {
@@ -89,13 +93,13 @@ html {
     text-align: left;
     line-height: 7vh;
     text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
-    margin-bottom: 3rem;
+    margin-bottom: .6em;
 }
 
 .tagline {
     font-family: var(--textFont);
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 2rem;
     font-style: italic;
     text-align: left;
 }
@@ -114,8 +118,12 @@ html {
     right: .5rem;
     font-family: var(--textFont);
     color: white;
-    font-size: .6rem;
+    font-size: 1rem;
 }
+
+
+
+
 
 
 /* link Styles */
@@ -131,21 +139,31 @@ html {
 }
 
 
+
+
+
+
 /* Social Links */
 .social-links {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    font-size: 2rem;
+    font-size: 4rem;
+    color: white;
+}
+
+.social-links a {
+    color: white;
 }
 
 
 
 
 .play-btn {
-    font-size: 12vw;
+    color: white;
+    font-size: 12rem;
     position: absolute;
-    top: 50%;
+    top: 46%;
     right: 18%;
     transform: translate(-50%, -50%);
 }
