@@ -14,7 +14,12 @@
     /* gradients */
     --darkGradient: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     --dimGradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* common card frame */
     --commonGradient: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    /* uncommon card frame */
+    --uncommonGradient: linear-gradient(to top, rgba(51, 51, 51, 1), rgba(51, 51, 51, 1), rgba(51, 51, 51, .5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    /* rare card frame */
+    --rareGradient: linear-gradient(to top, rgba(182, 145, 25, 1), rgba(182, 145, 25, .9), rgba(182, 145, 25, .5), rgba(182, 145, 25, .2), rgba(0, 0, 0, 0));
 }
 
 /* Reset */
@@ -261,6 +266,14 @@ html {
     background: var(--commonGradient);
 }
 
+.card-stat-container.uncommon {
+    background: var(--uncommonGradient);
+}
+
+.card-stat-container.rare {
+    background: var(--rareGradient);
+}
+
 
 .card-stat-row {
     height: 8.5vh;
@@ -305,7 +318,7 @@ html {
     .play-btn {
         font-size: 25vh;
     }
-    
+
     .card-stat-row {
         font-size: 1.5em;
     }
