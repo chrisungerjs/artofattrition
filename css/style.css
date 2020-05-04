@@ -57,6 +57,9 @@ html {
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size:cover;
     height: 100%;
     overflow: hidden;
     /* position for hero text */
@@ -81,6 +84,9 @@ html {
 }
 .flying-fortress {
     background-image: var(--dimGradient), url(../img/maps/flying-fortress.png);
+}
+.ancient-tree {
+    background-image: var(--dimGradient), url(../img/maps/ancient-tree.png);
 }
 
 
@@ -240,10 +246,11 @@ html {
 
 
 .player-2 {
-    height: 30%;
-    top: 0%;
+    height: 50%;
+    top: 5%;
     transform: translateX(-50%);
     z-index: -2000;
+    /* border: 3px solid gold; */
 }
 
 
@@ -266,20 +273,41 @@ html {
 
 /* Card Images */
 
+/* Tier 1 */
+
 .tier-1-common {
-    background: url(../img/tier1/Conscript.png);
+    background: url(../img/card-images/heroes/1-c.png);
 }
 
-.tier-1-uncommon {
-    background: url(../img/tier1/Mentor.png)
+.tier-1-uncommon-a {
+    background: url(../img/card-images/heroes/1-u-a.png)
+}
+
+.tier-1-uncommon-b {
+    background: url(../img/card-images/heroes/1-u-b.png);
 }
 
 .tier-1-rare {
-    background: url(../img/tier1/HumanFighter.png)
+    background: url(../img/card-images/heroes/1-x.png);
 }
 
+/* Tier 2 */
 
+.tier-2-common {
+    background: url(../img/card-images/heroes/2-c.png);
+}
 
+.tier-2-uncommon-a {
+    background: url(../img/card-images/heroes/2-u-a.png)
+}
+
+.tier-2-uncommon-b {
+    background: url(../img/card-images/heroes/2-u-b.png);
+}
+
+.tier-2-rare {
+    background: url(../img/card-images/heroes/2-x.png);
+}
 
 
 
@@ -327,7 +355,8 @@ html {
     background: var(--commonGradient);
 }
 
-.card-stat-container.uncommon {
+.card-stat-container.uncommon-a,
+.card-stat-container.uncommon-b {
     background: var(--uncommonGradient);
 }
 
@@ -341,6 +370,8 @@ html {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap-reverse;
+    overflow: hidden;
     font-size: 4rem;
     color: white;
     padding: 1rem;

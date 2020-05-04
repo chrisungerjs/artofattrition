@@ -14,7 +14,9 @@ const global = {
         'orc-fortress',
         'realm',
         'flying-fortress',
+        'ancient-tree',
     ],
+    enemyCards: [],
 
 }
 
@@ -81,8 +83,9 @@ const func = {
 
         // variables
         const totalCommons = 10;
-        const totalUncommons = 5;
-        const totalRares = 1;
+        const totalUncommonAs = 4;
+        const totalUncommonBs = 4;
+        const totalRares = 2;
         
         // make commons
         for (let i = 0; i < totalCommons; i++) {
@@ -99,15 +102,27 @@ const func = {
 
         }
 
-        // make uncommons
-        for (let i = 0; i < totalUncommons; i++) {
+        // make uncommon As - +1/+0
+        for (let i = 0; i < totalUncommonAs; i++) {
 
-            const rarity = 'uncommon';
+            const rarity = 'uncommon-a';
 
             // uncommons have either +1 power OR +1 health
             // 
-            const power = tier + func.randomNumberBetween(0,2);
-            const health = tier + (power > tier ? 0 : 1);
+            const power = tier + 1;
+            const health = tier;
+
+            func.generateCard(tier, rarity, power, health);
+
+        }
+
+        // make uncommon Bs - +0/+1
+        for (let i = 0; i < totalUncommonBs; i++) {
+
+            const rarity = 'uncommon-b';
+
+            const power = tier;
+            const health = tier + 1;
 
             func.generateCard(tier, rarity, power, health);
 
@@ -359,12 +374,26 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
 
+        // make enemy cards
+
         // toggle shop ui off
         func.toggleShop();
 
         // empty buy row
         $('.buy').empty();
+
+        // check if the enemy card array is empty
+
+        // if it is, generate a new enemy
+
+        // random player card attacks (random) enemy card
+
+        // attackCard function - call it with a delay
         
+    },
+
+    generateEnemies() {
+        global.enemyCards.push()
     },
 
     // check win state
@@ -376,7 +405,7 @@ const func = {
     checkLoss() {
 
     },
-    
+
     //////////////////////////
     // Utilities
     //////////////////////////
