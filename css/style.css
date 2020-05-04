@@ -84,6 +84,13 @@ html {
 
 
 
+
+
+
+
+
+
+
 /* Title Styles */
 
 .hero-text {
@@ -244,16 +251,25 @@ html {
     overflow: hidden;
 }
 
+.tier-1-common {
+    background: url(../img/tier1/Conscript.png);
+}
+
+.tier-1-uncommon {
+    background: url(../img/tier1/Mentor.png)
+}
+
+.tier-1-rare {
+    background: url(../img/tier1/HumanFighter.png)
+}
+
 .card-image {
     height: 32vh;
     /* replace this in js with dynamic classes */
-    background: url(../img/tier1/Conscript.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
-
-
 
 .card-stat-container {
     height: 100%;

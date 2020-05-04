@@ -174,7 +174,7 @@ const func = {
             // add card elements to the dom
             const cardElement = $('<div>').addClass('card-container').html(`
 
-                <div class="card-image">
+                <div class="card-image tier-${tier}-${rarity}">
                 <div class="card-stat-container ${rarity}">
                     <div class="card-stat-row">
                         <div class="card-tier">
