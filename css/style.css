@@ -47,7 +47,7 @@ body {
 /* Start Screen */
 html {
     /* background fill image */
-    background-image: var(--dimGradient) ,url(../img/start/Wizard\ Battle.png);
+    background-image: var(--dimGradient) ,url(../img/start/wizard-battle.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
@@ -74,8 +74,8 @@ html {
 .realm {
     background-image: var(--dimGradient), url(../img/maps/realm.png);
 }
-.troll-city {
-    background-image: var(--dimGradient), url(../img/maps/troll-city.png);
+.flying-fortress {
+    background-image: var(--dimGradient), url(../img/maps/flying-fortress.png);
 }
 
 
