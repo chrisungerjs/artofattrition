@@ -96,7 +96,7 @@ html {
     line-height: 7vh;
     text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
     margin-bottom: .6em;
-}
+}    
 
 .tagline {
     font-family: var(--textFont);
@@ -104,7 +104,7 @@ html {
     font-size: 2rem;
     font-style: italic;
     text-align: left;
-}
+}    
 
 
 
@@ -121,7 +121,8 @@ html {
     font-family: var(--textFont);
     color: white;
     font-size: 1rem;
-}
+    z-index: 2000;
+}    
 
 
 
@@ -136,13 +137,13 @@ html {
 .link {
     text-decoration: none;
     color: var(--accent);
-}
+}    
 .link:hover {
     filter: brightness(60%);
-}
+}    
 .link:active {
     filter: brightness(115%);
-}
+}    
 
 
 
@@ -157,11 +158,11 @@ html {
     right: 1rem;
     font-size: 4rem;
     color: white;
-}
+}    
 
 .social-links a {
     color: white;
-}
+}    
 
 
 
@@ -178,7 +179,7 @@ html {
     top: 46%;
     right: 18%;
     transform: translate(-50%, -50%);
-}
+}    
 
 
 
@@ -197,26 +198,150 @@ html {
     flex-wrap: nowrap;
     justify-content: center;
     border: 3px solid gold;
-}
+}    
 
 .buy {
-    height: 50%;
+    height: 40%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+}    
 
 .player-1 {
     height: 30%;
-    bottom: 10%;
-    transform: translateY(-50%);
-}
+    bottom: 0%;
+    transform: translateX(-50%);
+}    
 
 .player-2 {
     height: 30%;
-    top: 10%;
-    transform: translateY(-50%);
+    top: 0%;
+    transform: translateX(-50%);
+}    
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Card Styles */
+
+.card-container {
+    background: var(--dimGradient);
+    height: 40vh;
+    width: 32vh;
+    border: 1px solid black;
+    border-radius: .75em;
+    margin: 0 1rem;
+    position: relative;
+    overflow: hidden;
 }
+
+.card-image {
+    height: 80%;
+    background: url(../img/tier1/Conscript.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.card-stat-container {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    position: absolute;
+}
+
+
+.card-stat-row {
+    height: 8.5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 4rem;
+    color: white;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0%;
+}
+
+.power-health {
+}
+
+.power-health div {
+    display: inline;
+    text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,57 +357,3 @@ html {
 }
 
 
-
-
-
-
-
-
-
-/* Card Styles */
-
-.card-container {
-    border: 1px solid black;
-    margin: 0 1rem;
-}
-
-.card-container {
-    height: 30em;
-    width: 25em;
-    border-radius: .25rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
-}
-
-.card-image-bg {
-    height: 100%;
-    background: url(../img/tier1/Conscript.png);
-    background-repeat: no-repeat;
-    /* background-attachment: fixed; */
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
-}
-
-.card-image-png {
-    width: 100%;
-}
-
-.card-stat-container {
-    height: 5rem;
-    display: flex;
-    justify-content: space-between;
-    background-color: #333;
-    font-size: 4rem;
-    color: white;
-    padding: .25rem;
-    border-bottom-left-radius: .125rem;
-    border-bottom-right-radius: .125rem;
-}
-
-.card-tier {
-}
-
-.power-health div {
-    display: inline;
-    text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
-}
