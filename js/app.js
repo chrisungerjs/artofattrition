@@ -277,6 +277,10 @@ const func = {
     },
 
     buyCard(event) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 658c20bc79fb6fb2a6d5b1a2f786f9072b428f44
 
         // identify the corresponding
 
@@ -285,7 +289,11 @@ const func = {
 
         // move the card element from the buy row into the player row 
         $(event.currentTarget).remove().addClass('in-player-row').appendTo($('.player-1'));
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> 658c20bc79fb6fb2a6d5b1a2f786f9072b428f44
 
         console.log('you bought a card');
         console.log(event);
