@@ -372,10 +372,6 @@ html {
     border-radius: 1rem;
 }
 
-.tier-title {
-
-}
-
 .current-tier:hover {
     background: var(--dimGradient);
 }

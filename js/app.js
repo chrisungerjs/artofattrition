@@ -4,6 +4,7 @@
 
 const global = {
 
+    activePlayer: '',
     cardsInShop: [],
     cardsInPool: [],
     backgroundClasses: [
@@ -50,43 +51,28 @@ class Card {
 //////////////////////////
 
 const func = {
+
+    //////////////////////////
+    // Start Game Functions
+    //////////////////////////
     
     // press start to begin
     startGame() {
         
+        // ui functions
         func.generateBackground();
         func.hideTitles();
 
-        func.startBuyRound(1); // for the first player
-        
-        func.makeCardElements(); // should probably be inside startBuyRound
-        // I need to call startBuyRound with the current player's tier
-        // maybe an "active player" toggle to tell the buy cards function where to put the cards from the store
-        // attack listeners to card elements and callback this function
-        
-        
-        
-        
-        
-    },
-    
-    // make a random number from a range
-    randomNumberBetween(min, max) {
-    
-        // max is *not* inclusive - low is inclusive
-        return Math.floor(Math.random() * (max - min) + min);
-    
-    },
-    // generate a random background image
-    generateBackground() {
-        
-        const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
-        $('html').attr('class', global.backgroundClasses[randomIndex]);
-        
-    },
+        // set active player to player1 for the time being
+        global.activePlayer = player1;
 
+        // start buy round
+        func.startBuyRound(global.activePlayer.currentTier);
+        
+    },
+    
     // generate the starting card pool
-    generatePool(tier) { // I need to pass tier so I can leave it open to other players classes
+    generatePool(tier) { 
 
         // variables
         const totalCommons = 10;
@@ -137,20 +123,11 @@ const func = {
 
     },
 
-    // generate card object
+    // generate card objects
     generateCard(tier, rarity, power, health) {
 
         global.cardsInPool.push(new Card(tier, rarity, power, health));
     
-    },
-
-    // hide the title, play button, and social links
-    hideTitles() {
-
-        $('.hero-text').toggleClass('hidden');
-        $('.play-btn').toggleClass('hidden');
-        $('.social-links').toggleClass('hidden');
-
     },
 
     // generate card DOM elements
@@ -205,47 +182,21 @@ const func = {
         }
     },
 
-    // shuffle cards
-    shuffle(arr) {
-
-        // Random Number Function
-        const randomNumber = (arrLen) => Math.floor(Math.random() * arrLen);
-
-        // grab the index of the last array element
-        let lastIndex = arr.length - 1;
-
-        // initialize a temporary variable to hold the numbers as we swap
-        let temp = 0;
-
-        // loop through the array backwards from the end, ignoring index 0
-        for (let i = lastIndex; i > 0; i--) {
-
-            // temporarily store the current index's value
-            temp = arr[i];
-
-            // find a random index between the current index and index 1
-            randomIndex = randomNumber(i)
-
-            // set the current index's value to the value of the random index
-            arr[i] = arr[randomIndex];
-
-            // set that random index's value to the current index's value, which we stored in temp
-            arr[randomIndex] = temp;
-
-        }
-
-    },
-
-    // start buy round // need to finish
+    //////////////////////////
+    // Shop Functions
+    //////////////////////////
+    
+    // start buy round
     startBuyRound(tier) {
 
+        // ui functions
         $('.buy').toggleClass('hidden');
         $('.current-tier').toggleClass('hidden');
 
         // empty the current pool
         global.cardsInPool = [];
 
-        // generate the new card pool - pass the player's current tier
+        // generate the new card pool - pass the activeplayer's current tier
         func.generatePool(tier);
 
         // shuffle the card pool
@@ -279,17 +230,16 @@ const func = {
 
     },
 
-    // combat phase // need to finish
-    startCombat() {
-    },
-
+    // buy a card from the shop
     buyCard(event) {
 
+        func.checkRowSize();
+
         // decrement player money
-        player1.coins -= 3;
+        global.activePlayer.coins -= 3;
 
         // check if player can buy more items
-        if (player1.coins < 3 || player1.coins < tierUpgradeCost) {
+        if (global.activePlayer.coins < 3 || global.activePlayer.coins < tierUpgradeCost) {
 
             // COMBAT 
         }
@@ -301,13 +251,112 @@ const func = {
         const boughtCardId = event.currentTarget.id;
         const boughtCard = global.cardsInShop[boughtCardId];
 
-        // slice the card at that index and push it to player row
-        player1.cardsInPlay.push(boughtCard);
-        console.log(player1.cardsInPlay);
+        // push the bought card to the player row
+        global.activePlayer.cardsInPlay.push(boughtCard);
+        console.log(global.activePlayer.cardsInPlay);
 
     },
 
+    // sell a card to the shop // need to finish
+    sellCard(event) {
 
+        console.log('you sold a card');
+
+    },
+
+    // refresh the shop
+    refreshShop() {
+
+    },
+
+    // upgrade tier
+    upgradeTier() {
+
+        // increment tier and upgrade cost
+        global.activePlayer.currentTier++;
+        global.activePlayer.tierUpgradeCost++;
+
+        // 
+
+    },
+
+    //////////////////////////
+    // Combat Functions
+    //////////////////////////
+
+    // start combat phase // need to finish
+    startCombat() {
+
+    },
+
+    //////////////////////////
+    // Utilities
+    //////////////////////////
+    
+    // generate a random background image
+    generateBackground() {
+    
+        const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
+        $('html').attr('class', global.backgroundClasses[randomIndex]);
+        
+    },
+
+    // make a random number from a range
+    randomNumberBetween(min, max) {
+    
+        // max is *not* inclusive - low is inclusive
+        return Math.floor(Math.random() * (max - min) + min);
+    
+    },
+
+    // check row size (limit 7)
+    checkRowSize() {
+
+        if (global.activePlayer.cardsInPlay.length >= 7) {
+            console.log('too many cards in row');
+        }
+
+    },
+
+    // shuffle cards
+    shuffle(arr) {
+
+        // Random Number Function
+        const randomNumber = (arrLen) => Math.floor(Math.random() * arrLen);
+
+        // grab the index of the last array element
+        let lastIndex = arr.length - 1;
+
+        // initialize a temporary variable to hold the numbers as we swap
+        let temp = 0;
+
+        // loop through the array backwards from the end, ignoring index 0
+        for (let i = lastIndex; i > 0; i--) {
+
+            // temporarily store the current index's value
+            temp = arr[i];
+
+            // find a random index between the current index and index 1
+            randomIndex = randomNumber(i)
+
+            // set the current index's value to the value of the random index
+            arr[i] = arr[randomIndex];
+
+            // set that random index's value to the current index's value, which we stored in temp
+            arr[randomIndex] = temp;
+
+        }
+
+    },
+
+    // hide the title, play button, and social links
+    hideTitles() {
+
+        $('.hero-text').toggleClass('hidden');
+        $('.play-btn').toggleClass('hidden');
+        $('.social-links').toggleClass('hidden');
+
+    },
 
 }
 //////////////////////////
@@ -324,6 +373,4 @@ const func = {
 // App Logic
 //////////////////////////
 
-
 const player1 = new Player('Player 1');
-const player2 = new Player('Player 2');
