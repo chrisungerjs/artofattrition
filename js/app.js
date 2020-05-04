@@ -229,8 +229,8 @@ const func = {
     // buy a card from the shop
     buyCard(event) {
 
-        // check if the player has too many cards - limit 5
-        if (global.activePlayer.cardsInPlay.length >= 5) {
+        // check if the player has too many cards - limit 7
+        if (global.activePlayer.cardsInPlay.length >= 7) {
             return alert('You have too many creatures');
         }
 
