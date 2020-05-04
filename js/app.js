@@ -237,6 +237,7 @@ const func = {
 
         // decrement player money
         global.activePlayer.coins -= 3;
+        func.updateCoins();
 
         // check if player can buy more items
         if (global.activePlayer.coins < 3 || global.activePlayer.coins < tierUpgradeCost) {
@@ -265,8 +266,9 @@ const func = {
     // sell a card to the shop // need to finish
     sellCard(event) {
 
-        // decrement player coins
+        // increment player coins
         global.activePlayer.coins += 1;
+        func.updateCoins();
 
         // identify the id to get the object index
         const soldCardId = event.currentTarget.id;
@@ -296,7 +298,7 @@ const func = {
 
         // decrement players coins
         global.activePlayer.coins -= global.activePlayer.tierUpgradeCost;
-        console.log(global.activePlayer.coins);
+        func.updateCoins();
 
         // increment tier and upgrade cost
         global.activePlayer.currentTier++;
@@ -306,6 +308,10 @@ const func = {
        $('.tier-title').text(`Tier ${global.activePlayer.currentTier}`);
        $('.tier-cost').text(global.activePlayer.tierUpgradeCost);
 
+    },
+
+    updateCoins() {
+        $('.coin-total').text(global.activePlayer.coins);
     },
 
     //////////////////////////
