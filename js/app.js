@@ -62,18 +62,11 @@ const func = {
         
         // ui functions
         func.generateBackground();
-        func.hideTitles();
+        func.toggleTitles();
+        func.toggleShop();
 
         // set active player to player1 for the time being
         global.activePlayer = player1;
-
-        // ui functions
-        $('.buy').toggleClass('hidden');
-        $('.current-tier').toggleClass('hidden');
-        $('.refresh-tier').toggleClass('hidden');
-        $('.coins').toggleClass('hidden');
-        $('.reset-btn').toggleClass('hidden');
-        $('.go-to-combat').toggleClass('hidden');
 
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
@@ -202,6 +195,25 @@ const func = {
 
     reset() {
         console.log('reset game');
+
+        const player = global.activePlayer;
+
+        global.cardsInShop = [];
+        global.cardsInPool = [];
+        player.cardsInPlay = [];
+        $('.card-container').remove();
+
+        player.health = 20;
+        player.coins = 3;
+        player.currentTier = 1;
+        player.tierUpgradeCost = 4;
+        
+        
+
+        func.toggleTitles();
+        func.toggleShop();
+
+
     },
 
     //////////////////////////
@@ -300,8 +312,15 @@ const func = {
     // refresh the shop
     refreshShop(event) {
 
+        // decrement player coins and update ui
+        global.activePlayer.coins -= 1;
+        func.updateCoins();
+
+        // empty the shop array and ui
         global.cardsInShop = [];
         $('.buy .card-container').remove();
+
+        // call buy round with current tier
         func.startBuyRound(global.activePlayer.currentTier);
 
     },
@@ -340,6 +359,7 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
         console.log('start combat');
+        
     },
 
     //////////////////////////
@@ -393,12 +413,28 @@ const func = {
 
     },
 
-    // hide the title, play button, and social links
-    hideTitles() {
+    //////////////////////////
+    // UI toggles
+    //////////////////////////
+    
+    // toggle hidden class on the title, play button, and social links
+    toggleTitles() {
 
         $('.hero-text').toggleClass('hidden');
         $('.play-btn').toggleClass('hidden');
         $('.social-links').toggleClass('hidden');
+
+    },
+
+    // toggle shop ui
+    toggleShop() {
+
+        $('.card-row').toggleClass('hidden');
+        $('.coins').toggleClass('hidden');
+        $('.current-tier').toggleClass('hidden');
+        $('.refresh-tier').toggleClass('hidden');
+        $('.reset-btn').toggleClass('hidden');
+        $('.go-to-combat').toggleClass('hidden');
 
     },
 
