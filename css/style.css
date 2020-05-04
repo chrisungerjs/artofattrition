@@ -251,6 +251,8 @@ html {
     overflow: hidden;
 }
 
+/* Card Images */
+
 .tier-1-common {
     background: url(../img/tier1/Conscript.png);
 }
@@ -262,6 +264,27 @@ html {
 .tier-1-rare {
     background: url(../img/tier1/HumanFighter.png)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .card-image {
     height: 32vh;
@@ -327,18 +350,45 @@ html {
 
 
 
-/* mobile styles */
 
-@media (max-width: 850px) and (orientation: landscape) {
 
-    .play-btn {
-        font-size: 25vh;
-    }
 
-    .card-stat-row {
-        font-size: 1.5em;
-    }
 
+
+
+
+
+
+
+.current-tier {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--titleFont);
+    color: white;
+    font-size: 4vh;
+    background: var(--darkGradient);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+}
+
+.tier-title {
+    margin-bottom: 0;
+}
+
+.current-tier:hover {
+    background: var(--dimGradient);
+}
+
+.upgrade-tier {
+}
+
+.upgrade-tier div{
+    font-family: var(--textFont);
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: italic;
 }
 
 
@@ -368,27 +418,19 @@ html {
 
 
 
+/* mobile styles */
 
+@media (max-width: 850px) and (orientation: landscape) {
 
+    .play-btn {
+        font-size: 25vh;
+    }
 
+    .card-stat-row {
+        font-size: 1.5em;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

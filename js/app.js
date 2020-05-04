@@ -235,6 +235,7 @@ const func = {
     startBuyRound(tier) {
 
         $('.buy').toggleClass('hidden');
+        $('.current-tier').toggleClass('hidden');
 
         // empty the current pool
         global.cardsInPool = [];
@@ -282,6 +283,7 @@ const func = {
 
         // decrement player money
         player1.coins -= 3;
+        console.log(player1.coins)
 
         // check if player can buy more items
         if (player1.coins < 3 || player1.coins < tierUpgradeCost) {
