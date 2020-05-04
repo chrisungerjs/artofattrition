@@ -42,7 +42,8 @@ class Card {
         this.rarity = rarity;
         this.power = power;
         this.health = health;
-        
+        this.toRemove = false;
+
     }
 }
 
@@ -230,8 +231,8 @@ const func = {
     // buy a card from the shop
     buyCard(event) {
 
-        // check if the player has too many cards - limit 5
-        if (global.activePlayer.cardsInPlay.length >= 5) {
+        // check if the player has too many cards - limit 7
+        if (global.activePlayer.cardsInPlay.length >= 7) {
             return alert('You have too many minions. Sell one');
         }
 
@@ -245,8 +246,6 @@ const func = {
             // modal alert
             // COMBAT 
         }
-
-        console.log(event.currentTarget.id)
 
         // identify the id to find the corresponding object index
         const boughtCardId = event.currentTarget.id;
@@ -274,7 +273,15 @@ const func = {
         const soldCardId = event.currentTarget.id;
         const soldCard = global.activePlayer.cardsInPlay[soldCardId];
         
+        // remove the element from the dom
         $(event.currentTarget).remove();
+        
+        // remove the card from the player array
+        soldCard.toRemove = true;
+        global.activePlayer.cardsInPlay = global.activePlayer.cardsInPlay.filter((value) => value.toRemove === false);
+        console.log(global.activePlayer.cardsInPlay);
+
+
 
     },
 
