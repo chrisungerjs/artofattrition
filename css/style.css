@@ -197,12 +197,20 @@ html {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+<<<<<<< HEAD
     /* border: 3px solid gold; */
+=======
+    border: 3px solid gold;
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
 }    
 
 .buy {
     height: 40%;
+<<<<<<< HEAD
     top: 40%;
+=======
+    top: 50%;
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
     left: 50%;
     transform: translate(-50%, -50%);
 }    
@@ -210,7 +218,11 @@ html {
 .player-1 {
     width: 75%;
     height: 30%;
+<<<<<<< HEAD
     bottom: 5%;
+=======
+    bottom: 0%;
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
     transform: translateX(-50%);
 }    
 
@@ -218,7 +230,15 @@ html {
     height: 30%;
     top: 0%;
     transform: translateX(-50%);
+<<<<<<< HEAD
 }
+=======
+}    
+
+
+
+
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
 
 
 
@@ -242,7 +262,11 @@ html {
 }
 
 .card-image {
+<<<<<<< HEAD
     height: 32vh;
+=======
+    height: 80%;
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
     background: url(../img/tier1/Conscript.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -281,6 +305,7 @@ html {
 }
 
 
+<<<<<<< HEAD
 .in-player-row {
     height: 100%;
     width: 25%;
@@ -359,3 +384,78 @@ html {
 }
 
 
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* hide class for toggles */
+
+.hidden {
+    display: none;
+}
+
+
+>>>>>>> 58f74ac0ae3b6e7701d1ea89bd70bb55dbd6abc3
