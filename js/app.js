@@ -156,11 +156,14 @@ const func = {
     // generate card DOM elements
     makeCardElements(cardArray) {    
 
+        // initialize counter for index IDs
+        let indexId = 0;
+
         for (card in cardArray) {
 
             const rarity = cardArray[card].rarity;
             const tier = cardArray[card].tier;
-            console.log(tier)
+            // console.log(tier)
 
             // add a utf star for each tier
             let tierStars = '';
@@ -172,7 +175,7 @@ const func = {
             }
            
             // add card elements to the dom
-            const cardElement = $('<div>').addClass('card-container').html(`
+            const cardElement = $('<div>').addClass('card-container').attr('id', indexId).html(`
 
                 <div class="card-image tier-${tier}-${rarity}">
                 <div class="card-stat-container ${rarity}">
@@ -197,6 +200,8 @@ const func = {
             // append to the buy row
             $('.buy').append(cardElement);
 
+            // increment counter
+            indexId++;
         }
     },
 
@@ -280,24 +285,26 @@ const func = {
 
     buyCard(event) {
 
-
         // decrement player money
         player1.coins -= 3;
-        console.log(player1.coins)
 
         // check if player can buy more items
         if (player1.coins < 3 || player1.coins < tierUpgradeCost) {
-            console.log('go to combat'); // goToCombat function
+
+            // COMBAT 
         }
-
-        // identify the class to find the corresponding object index
-
 
         // move the card element from the buy row into the player row 
         $(event.currentTarget).remove().addClass('in-player-row').appendTo($('.player-1'));
 
-        console.log('you bought a card');
-        console.log(event.target);
+        // identify the id to find the corresponding object index
+        const boughtCardId = event.currentTarget.id;
+        const boughtCard = global.cardsInShop[boughtCardId];
+
+        // slice the card at that index and push it to player row
+        player1.cardsInPlay.push(boughtCard);
+        console.log(player1.cardsInPlay);
+
     },
 
 

@@ -362,8 +362,8 @@ html {
 
 .current-tier {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
+    top: 2vh;
+    left: 2vh;
     font-family: var(--titleFont);
     color: white;
     font-size: 4vh;
@@ -373,7 +373,7 @@ html {
 }
 
 .tier-title {
-    margin-bottom: 0;
+
 }
 
 .current-tier:hover {
@@ -386,7 +386,7 @@ html {
 .upgrade-tier div{
     font-family: var(--textFont);
     display: inline-block;
-    font-size: 1.4rem;
+    font-size: 2vh;
     font-weight: 400;
     font-style: italic;
 }
