@@ -231,7 +231,7 @@ const func = {
 
         // check if the player has too many cards - limit 7
         if (global.activePlayer.cardsInPlay.length >= 7) {
-            return alert('You have too many creatures');
+            return alert('You have too many minions. Sell one');
         }
 
         // decrement player money
@@ -244,8 +244,7 @@ const func = {
             // COMBAT 
         }
 
-        // move the card element from the buy row into the player row 
-        $(event.currentTarget).remove().addClass('in-player-row').appendTo($('.player-1'));
+        console.log(event.currentTarget.id)
 
         // identify the id to find the corresponding object index
         const boughtCardId = event.currentTarget.id;
@@ -253,14 +252,26 @@ const func = {
 
         // push the bought card to the player row
         global.activePlayer.cardsInPlay.push(boughtCard);
-        console.log(global.activePlayer.cardsInPlay);
+
+        // move the card element from the buy row into the player row 
+        const cardElement = $(event.currentTarget).remove();
+        cardElement.attr('id', global.activePlayer.cardsInPlay.length - 1)
+        cardElement.on('click', func.sellCard);
+        cardElement.addClass('in-player-row').appendTo($('.player-1'));
 
     },
 
     // sell a card to the shop // need to finish
     sellCard(event) {
 
-        console.log('you sold a card');
+        // decrement player coins
+        global.activePlayer.coins += 1;
+
+        // identify the id to get the object index
+        const soldCardId = event.currentTarget.id;
+        const soldCard = global.activePlayer.cardsInPlay[soldCardId];
+        
+        $(event.currentTarget).remove();
 
     },
 

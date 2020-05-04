@@ -303,6 +303,14 @@ html {
     position: absolute;
 }
 
+.card-container:hover {
+    filter: brightness(115%);
+}
+
+.card-container:active {
+    filter: brightness(200%);
+}
+
 .card-stat-container.common {
     background: var(--commonGradient);
 }
@@ -326,6 +334,11 @@ html {
     padding: 1rem;
     position: absolute;
     bottom: 0%;
+}
+
+.card-tier {
+    font-size: 3vh;
+    color: gold;
 }
 
 .power-health {
@@ -352,9 +365,9 @@ html {
 .refresh-tier {
     color: white;
     position: absolute;
-    top: 5rem;
-    right: 5rem;
-    font-size: 10rem;
+    top: 4vh;
+    right: 4vh;
+    font-size: 10vh;
     cursor: pointer;
 }
 
@@ -373,11 +386,13 @@ html {
 
 .current-tier {
     position: absolute;
-    top: 2vh;
-    left: 2vh;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--titleFont);
     color: white;
     font-size: 4vh;
+    font-weight: 900;
     background: var(--darkGradient);
     padding: 1rem 2rem;
     border-radius: 1rem;
