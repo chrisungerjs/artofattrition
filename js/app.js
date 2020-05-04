@@ -211,7 +211,7 @@ const func = {
         $('.card-container').remove();
 
 
-        // ui toggles
+        // ui toggles - purposefully not resetting background image
         func.toggleTitles();
         func.toggleShop();
         func.toggleCards();
@@ -367,6 +367,16 @@ const func = {
         
     },
 
+    // check win state
+    checkWin() {
+
+    },
+
+    // check loss state
+    checkLoss() {
+
+    },
+    
     //////////////////////////
     // Utilities
     //////////////////////////
