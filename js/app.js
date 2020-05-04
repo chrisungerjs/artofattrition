@@ -277,6 +277,7 @@ const func = {
     },
 
     buyCard(event) {
+
         // identify the corresponding
 
 
@@ -284,6 +285,7 @@ const func = {
 
         // move the card element from the buy row into the player row 
         $(event.currentTarget).remove().addClass('in-player-row').appendTo($('.player-1'));
+
         console.log('you bought a card');
         console.log(event);
         console.log(event.target);
