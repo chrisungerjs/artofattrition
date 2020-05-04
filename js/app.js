@@ -12,7 +12,7 @@ const global = {
         'guincho',
         'orc-fortress',
         'realm',
-        'troll-city',
+        // 'troll-city',
     ],
 
 }
