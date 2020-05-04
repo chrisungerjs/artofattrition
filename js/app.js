@@ -4,6 +4,7 @@
 
 const global = {
 
+    activePlayer: '',
     cardsInShop: [],
     cardsInPool: [],
     backgroundClasses: [
@@ -54,19 +55,15 @@ const func = {
     // press start to begin
     startGame() {
         
+        // ui functions
         func.generateBackground();
         func.hideTitles();
 
-        func.startBuyRound(1); // for the first player
-        
-        func.makeCardElements(); // should probably be inside startBuyRound
-        // I need to call startBuyRound with the current player's tier
-        // maybe an "active player" toggle to tell the buy cards function where to put the cards from the store
-        // attack listeners to card elements and callback this function
-        
-        
-        
-        
+        // set active player to player1 for the time being
+        global.activePlayer = player1;
+
+        // start buy round
+        func.startBuyRound();
         
     },
     
@@ -237,15 +234,18 @@ const func = {
     },
 
     // start buy round // need to finish
-    startBuyRound(tier) {
+    startBuyRound() {
 
+        const tier = global.activePlayer.currentTier;
+
+        // ui functions
         $('.buy').toggleClass('hidden');
         $('.current-tier').toggleClass('hidden');
 
         // empty the current pool
         global.cardsInPool = [];
 
-        // generate the new card pool - pass the player's current tier
+        // generate the new card pool - pass the active player's current tier
         func.generatePool(tier);
 
         // shuffle the card pool
@@ -283,13 +283,24 @@ const func = {
     startCombat() {
     },
 
+    // check row size (limit 7)
+    checkRowSize() {
+
+        if (global.activePlayer.cardsInPlay.length >= 7) {
+            console.log('too many cards in row');
+        }
+
+    },
+
     buyCard(event) {
 
+        func.checkRowSize();
+
         // decrement player money
-        player1.coins -= 3;
+        global.activePlayer.coins -= 3;
 
         // check if player can buy more items
-        if (player1.coins < 3 || player1.coins < tierUpgradeCost) {
+        if (global.activePlayer.coins < 3 || global.activePlayer.coins < tierUpgradeCost) {
 
             // COMBAT 
         }
@@ -301,13 +312,11 @@ const func = {
         const boughtCardId = event.currentTarget.id;
         const boughtCard = global.cardsInShop[boughtCardId];
 
-        // slice the card at that index and push it to player row
-        player1.cardsInPlay.push(boughtCard);
-        console.log(player1.cardsInPlay);
+        // push the bought card to the player row
+        global.activePlayer.cardsInPlay.push(boughtCard);
+        console.log(global.activePlayer.cardsInPlay);
 
     },
-
-
 
 }
 //////////////////////////
@@ -324,6 +333,4 @@ const func = {
 // App Logic
 //////////////////////////
 
-
 const player1 = new Player('Player 1');
-const player2 = new Player('Player 2');
