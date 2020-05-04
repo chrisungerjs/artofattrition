@@ -72,6 +72,8 @@ const func = {
         $('.current-tier').toggleClass('hidden');
         $('.refresh-tier').toggleClass('hidden');
         $('.coins').toggleClass('hidden');
+        $('.reset-btn').toggleClass('hidden');
+        $('.go-to-combat').toggleClass('hidden');
 
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
@@ -198,6 +200,10 @@ const func = {
         }
     },
 
+    reset() {
+        console.log('reset game');
+    },
+
     //////////////////////////
     // Shop Functions
     //////////////////////////
@@ -231,8 +237,8 @@ const func = {
     // buy a card from the shop
     buyCard(event) {
 
-        // check if the player has too many cards - limit 7
-        if (global.activePlayer.cardsInPlay.length >= 7) {
+        // check if the player has too many cards - limit 6
+        if (global.activePlayer.cardsInPlay.length >= 6) {
             return alert('You have too many minions. Sell one');
         }
 
@@ -333,7 +339,7 @@ const func = {
 
     // start combat phase // need to finish
     startCombat() {
-
+        console.log('start combat');
     },
 
     //////////////////////////
@@ -406,6 +412,8 @@ const func = {
         playButton: $('.play-btn').on('click', func.startGame),
         tierUpgrade: $('.current-tier').on('click', func.upgradeTier),
         refreshButton: $('.refresh-tier').on('click', func.refreshShop),
+        combatButton: $('.go-to-combat').on('click', func.startCombat),
+        resetButton: $('.reset-btn').on('click', func.reset),
     }
 
 //////////////////////////

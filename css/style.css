@@ -190,7 +190,7 @@ html {
     font-size: 12rem;
     position: absolute;
     top: 46%;
-    right: 18%;
+    right: 15%;
     transform: translate(-50%, -50%);
     cursor: pointer;
 }    
@@ -227,6 +227,11 @@ html {
     bottom: 5%;
     transform: translateX(-50%);
 }    
+
+.player-1 .card-container {
+    max-width: 18vw;
+}
+
 
 .player-2 {
     height: 30%;
@@ -366,8 +371,8 @@ html {
     color: white;
     position: absolute;
     top: 4vh;
-    right: 4vh;
-    font-size: 10vh;
+    right: 19vh;
+    font-size: 7vh;
     cursor: pointer;
 }
 
@@ -421,7 +426,53 @@ html {
     position: absolute;
     top: 4vh;
     left: 4vh;
-    font-size: 5vh;
+    font-size: 8vh;
+}
+
+.coin-total {
+    font-size: 4vh;
+}
+
+
+
+
+
+
+.reset-btn {
+    font-size: 7vh;
+    color: white;
+    position: absolute;
+    top: 4vh;
+    left: 19vh;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    filter: brightness(80%);
+}
+
+.reset-btn:active {
+    filter: brightness(115%);
+}
+
+
+
+.go-to-combat {
+    color: white;
+    position: absolute;
+    font-size: 12vh;
+    font-weight: bold;
+    top: 3vh;
+    right: 3vh;
+    cursor: pointer
+}
+
+.go-to-combat:hover {
+    filter: brightness(80%);
+}
+
+.go-to-combat:active {
+    filter: brightness(115%);
 }
 
 
@@ -433,18 +484,13 @@ html {
 
 
 
+@media (max-width: 850px) {
 
+    .body {
+        width: 700px;
+    }
 
-
-
-
-
-
-
-
-
-
-
+}
 
 
 /* mobile styles */
