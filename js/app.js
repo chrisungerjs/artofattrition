@@ -59,14 +59,17 @@ const func = {
     
     // press start to begin
     startGame() {
+
+        // set active player to player1 for the time being
+        global.activePlayer = player1;
         
         // ui functions
         func.generateBackground();
         func.toggleTitles();
         func.toggleShop();
-
-        // set active player to player1 for the time being
-        global.activePlayer = player1;
+        func.toggleCards();
+        func.updateCoins();
+        func.updateTier();
 
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
@@ -194,25 +197,26 @@ const func = {
     },
 
     reset() {
-        console.log('reset game');
 
+        player1 = {};
+        player1 = new Player('Player 1');
         const player = global.activePlayer;
 
+        // reset global variables
         global.cardsInShop = [];
         global.cardsInPool = [];
         player.cardsInPlay = [];
+
+        // empty the dom cards
         $('.card-container').remove();
 
-        player.health = 20;
-        player.coins = 3;
-        player.currentTier = 1;
-        player.tierUpgradeCost = 4;
-        
-        
 
+        // ui toggles
         func.toggleTitles();
         func.toggleShop();
-
+        func.toggleCards();
+        func.updateTier();
+        func.updateCoins();
 
     },
 
@@ -297,7 +301,6 @@ const func = {
         // remove the card from the player array
         soldCard.toRemove = true;
         global.activePlayer.cardsInPlay = global.activePlayer.cardsInPlay.filter((value) => value.toRemove === false);
-        // console.log(global.activePlayer.cardsInPlay);
 
         // reset ids 
         const $elementList = $('.card-container.in-player-row');
@@ -311,6 +314,8 @@ const func = {
 
     // refresh the shop
     refreshShop(event) {
+
+        // check coins function - canIPay
 
         // decrement player coins and update ui
         global.activePlayer.coins -= 1;
@@ -331,7 +336,7 @@ const func = {
         // check if player has enough money to upgrade
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<uncomment
         // if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
-        //     return (console.log('not enough coins'));
+        //     return (alert('not enough coins'));
         // }
 
         // decrement players coins
@@ -343,13 +348,8 @@ const func = {
         global.activePlayer.tierUpgradeCost++;
 
         // update dom
-       $('.tier-title').text(`Tier ${global.activePlayer.currentTier}`);
-       $('.tier-cost').text(global.activePlayer.tierUpgradeCost);
+       func.updateTier();
 
-    },
-
-    updateCoins() {
-        $('.coin-total').text(global.activePlayer.coins);
     },
 
     //////////////////////////
@@ -358,7 +358,12 @@ const func = {
 
     // start combat phase // need to finish
     startCombat() {
-        console.log('start combat');
+
+        // toggle shop ui off
+        func.toggleShop();
+
+        // empty buy row
+        $('.buy').empty();
         
     },
 
@@ -414,7 +419,7 @@ const func = {
     },
 
     //////////////////////////
-    // UI toggles
+    // UI Functions
     //////////////////////////
     
     // toggle hidden class on the title, play button, and social links
@@ -429,13 +434,32 @@ const func = {
     // toggle shop ui
     toggleShop() {
 
-        $('.card-row').toggleClass('hidden');
         $('.coins').toggleClass('hidden');
         $('.current-tier').toggleClass('hidden');
         $('.refresh-tier').toggleClass('hidden');
-        $('.reset-btn').toggleClass('hidden');
         $('.go-to-combat').toggleClass('hidden');
+        $('.reset-btn').toggleClass('hidden');
+    },
 
+    // toggle card rows
+    toggleCards() {
+
+        $('.card-row').toggleClass('hidden');
+
+    },
+
+    // update tier labels
+    updateTier() {
+
+        $('.tier-title').text(`Tier ${global.activePlayer.currentTier}`);
+        $('.tier-cost').text(global.activePlayer.tierUpgradeCost);
+
+    },
+
+    // update coins
+    updateCoins() {
+
+        $('.coin-total').text(global.activePlayer.coins);
     },
 
 }
@@ -456,4 +480,4 @@ const func = {
 // App Logic
 //////////////////////////
 
-const player1 = new Player('Player 1');
+let player1 = new Player('Player 1');

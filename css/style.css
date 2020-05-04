@@ -198,6 +198,7 @@ html {
     right: 15%;
     transform: translate(-50%, -50%);
     cursor: pointer;
+    z-index: 2000;
 }    
 
 
@@ -242,6 +243,7 @@ html {
     height: 30%;
     top: 0%;
     transform: translateX(-50%);
+    z-index: -2000;
 }
 
 
@@ -387,6 +389,14 @@ html {
 
 .refresh-tier:active {
     filter: brightness(115%);
+}
+
+.refresh-cost {
+    font-size: 2vh;
+    position: absolute;
+    top: 48%;
+    left: 49%;
+    transform: translate(-50%, -50%);
 }
 
 
