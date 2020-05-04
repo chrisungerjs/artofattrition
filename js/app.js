@@ -28,6 +28,7 @@ class Player {
         this.health = 20;
         this.currentTier = 1;
         this.cardsInPlay = [];
+        this.coins = 3;
 
     }
 }
@@ -39,7 +40,7 @@ class Card {
         this.rarity = rarity;
         this.power = power;
         this.health = health;
-
+        
     }
 }
 
@@ -48,34 +49,41 @@ class Card {
 //////////////////////////
 
 const func = {
-
+    
     // press start to begin
     startGame() {
-
+        
         func.generateBackground();
         func.hideTitles();
-
+        
         // determine who goes first and store - global
-
+        
         func.startBuyRound(1); // for the first player
-
+        
         func.makeCardElements(); // should probably be inside startBuyRound
         // I need to call startBuyRound with the current player's tier
         // maybe an "active player" toggle to tell the buy cards function where to put the cards from the store
         // attack listeners to card elements and callback this function
-
-
-
-
-
+        
+        
+        
+        
+        
     },
-
+    
+    // make a random number from a range
+    randomNumberBetween(min, max) {
+    
+        // max is *not* inclusive - low is inclusive
+        return Math.floor(Math.random() * (max - min) + min);
+    
+    },
     // generate a random background image
     generateBackground() {
-
+        
         const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
         $('html').attr('class', global.backgroundClasses[randomIndex]);
-
+        
     },
 
     // generate the starting card pool
@@ -132,7 +140,9 @@ const func = {
 
     // generate card object
     generateCard(tier, rarity, power, health) {
+
         global.cardsInPool.push(new Card(tier, rarity, power, health));
+    
     },
 
     // hide the title, play button, and social links
@@ -144,32 +154,28 @@ const func = {
 
     },
 
-    // generate card DOM elements - need to finish designing cards
+    // generate card DOM elements
     makeCardElements(cardArray) {    
 
         for (card in cardArray) {
 
+            // add a utf star for each tier
             let tierStars = '';
 
             for (let i = 0; i < cardArray[card].tier; i++){
 
-                tierStars += '<i class="fas fa-star">';
+                tierStars += '&#11088;';
 
             }
-            console.log(tierStars)
-            // console.log(cardArray[card]);
-            
-            // ${tierStars}
+           
+            // add card elements to the dom
+            const cardElement = $('<div>').addClass('card-container').html(`
 
-            // <img src="img/tier 1/Conscript.png" class="card-image-png ${cardArray[card].rarity}" title="" alt="">
- 
-            const cardElement = $('<div>').addClass('card').html(`
-
-                <div class="card-container">
-                    <div class="card-image-bg">
-                    </div>
-                    <div class="card-stat-container">
+                <div class="card-image">
+                <div class="card-stat-container">
+                    <div class="card-stat-row">
                         <div class="card-tier">
+                        ${tierStars}
                         </div>
                         <div class="power-health">
                             <div class="card-power">${cardArray[card].power}</div>
@@ -178,12 +184,12 @@ const func = {
                         </div>
                     </div>
                 </div>
-            
+                </div>
+
             `);
 
-            // add listener
-            cardElement.on('click', () => console.log(`you bought a card`))
-            // this listener is going to trigger the buyCard function
+            // add event listener <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Can I just put this in my global handler and if so how?
+            cardElement.on('click', (event) => func.buyCard(event));
             
             // append to the buy row
             $('.buy').append(cardElement);
@@ -270,13 +276,21 @@ const func = {
     startCombat() {
     },
 
-    // make a random number from a range
-    randomNumberBetween(min, max) {
+    buyCard(event) {
 
-        // max is *not* inclusive - low is inclusive
-        return Math.floor(Math.random() * (max - min) + min);
+        // identify the corresponding
 
+
+
+
+        // move the card element from the buy row into the player row 
+        $(event.currentTarget).remove().appendTo($('.player-1'));
+        console.log('you bought a card');
+        console.log(event);
+        console.log(event.target);
     },
+
+
 
 }
 //////////////////////////
