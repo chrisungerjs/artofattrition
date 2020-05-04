@@ -26,9 +26,10 @@ class Player {
 
         this.name = name;
         this.health = 20;
-        this.currentTier = 1;
         this.cardsInPlay = [];
         this.coins = 3;
+        this.currentTier = 1;
+        this.tierUpgradeCost = 4;
 
     }
 }
@@ -55,9 +56,7 @@ const func = {
         
         func.generateBackground();
         func.hideTitles();
-        
-        // determine who goes first and store - global
-        
+
         func.startBuyRound(1); // for the first player
         
         func.makeCardElements(); // should probably be inside startBuyRound
@@ -159,10 +158,14 @@ const func = {
 
         for (card in cardArray) {
 
+            const rarity = cardArray[card].rarity;
+            const tier = cardArray[card].tier;
+            console.log(tier)
+
             // add a utf star for each tier
             let tierStars = '';
 
-            for (let i = 0; i < cardArray[card].tier; i++){
+            for (let i = 0; i < tier; i++){
 
                 tierStars += '&#11088;';
 
@@ -172,7 +175,7 @@ const func = {
             const cardElement = $('<div>').addClass('card-container').html(`
 
                 <div class="card-image">
-                <div class="card-stat-container">
+                <div class="card-stat-container ${rarity}">
                     <div class="card-stat-row">
                         <div class="card-tier">
                         ${tierStars}
@@ -268,8 +271,6 @@ const func = {
 
         }
 
-
-
     },
 
     // combat phase // need to finish
@@ -278,16 +279,22 @@ const func = {
 
     buyCard(event) {
 
-        // identify the corresponding
 
+        // decrement player money
+        player1.coins -= 3;
 
+        // check if player can buy more items
+        if (player1.coins < 3 || player1.coins < tierUpgradeCost) {
+            console.log('go to combat'); // goToCombat function
+        }
+
+        // identify the class to find the corresponding object index
 
 
         // move the card element from the buy row into the player row 
         $(event.currentTarget).remove().addClass('in-player-row').appendTo($('.player-1'));
 
         console.log('you bought a card');
-        console.log(event);
         console.log(event.target);
     },
 

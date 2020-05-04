@@ -14,6 +14,7 @@
     /* gradients */
     --darkGradient: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     --dimGradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    --commonGradient: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
 }
 
 /* Reset */
@@ -252,8 +253,12 @@ html {
 .card-stat-container {
     height: 100%;
     width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, .25), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    
     position: absolute;
+}
+
+.card-stat-container.common {
+    background: var(--commonGradient);
 }
 
 
@@ -285,6 +290,27 @@ html {
 
 
 
+
+
+
+
+
+
+
+
+/* mobile styles */
+
+@media (max-width: 850px) and (orientation: landscape) {
+
+    .play-btn {
+        font-size: 25vh;
+    }
+    
+    .card-stat-row {
+        font-size: 1.5em;
+    }
+
+}
 
 
 
