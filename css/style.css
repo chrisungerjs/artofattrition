@@ -192,6 +192,7 @@ html {
     top: 46%;
     right: 18%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }    
 
 
@@ -297,7 +298,7 @@ html {
 .card-stat-container {
     height: 100%;
     width: 100%;
-    
+    cursor: pointer;
     position: absolute;
 }
 
@@ -347,13 +348,22 @@ html {
 
 
 
+.refresh-tier {
+    color: white;
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    font-size: 10rem;
+    cursor: pointer;
+}
 
+.refresh-tier:hover {
+    filter: brightness(85%);
+}
 
-
-
-
-
-
+.refresh-tier:active {
+    filter: brightness(115%);
+}
 
 
 
@@ -370,10 +380,12 @@ html {
     background: var(--darkGradient);
     padding: 1rem 2rem;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .current-tier:hover {
     background: var(--dimGradient);
+    cursor: pointer;
 }
 
 .upgrade-tier {
@@ -385,6 +397,7 @@ html {
     font-size: 2vh;
     font-weight: 400;
     font-style: italic;
+    cursor: pointer;
 }
 
 

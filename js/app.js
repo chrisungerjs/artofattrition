@@ -66,12 +66,17 @@ const func = {
         // set active player to player1 for the time being
         global.activePlayer = player1;
 
+        // ui functions
+        $('.buy').toggleClass('hidden');
+        $('.current-tier').toggleClass('hidden');
+        $('.refresh-tier').toggleClass('hidden');
+
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
         
     },
     
-    // generate the starting card pool
+    // generate the card pool
     generatePool(tier) { 
 
         // variables
@@ -140,15 +145,24 @@ const func = {
 
             const rarity = cardArray[card].rarity;
             const tier = cardArray[card].tier;
-            // console.log(tier)
 
             // add a utf star for each tier
             let tierStars = '';
 
-            for (let i = 0; i < tier; i++){
+            if (global.activePlayer.currentTier <= 3) { 
+                for (let i = 0; i < tier; i++){
 
-                tierStars += '&#11088;';
-
+                    tierStars += '&#11088;';
+                }
+            } 
+            else if (global.activePlayer.currentTier <= 6) {
+                for (let i = 0; i < tier - 3; i++) {
+                    
+                    tierStars += '&#128081;';
+                }
+            } else {
+                
+                tierStars += tier;
             }
            
             // add card elements to the dom
@@ -189,11 +203,7 @@ const func = {
     // start buy round
     startBuyRound(tier) {
 
-        // ui functions
-        $('.buy').toggleClass('hidden');
-        $('.current-tier').toggleClass('hidden');
-
-        // empty the current pool
+        // empty the current pool 
         global.cardsInPool = [];
 
         // generate the new card pool - pass the activeplayer's current tier
@@ -202,38 +212,27 @@ const func = {
         // shuffle the card pool
         func.shuffle(global.cardsInPool);
 
-        // set the quantity of cards to appear in the shop
-        const shopQty = tier + 2;
+        // set the quantity of cards to appear in the shop - limit 5
+        const shopQty = tier + 2 <= 5 ? tier + 2 : 5;
 
         // add the appropriate amount of cards to the shop
         for (let i = 0; i < shopQty; i++) {
 
             global.cardsInShop.push(global.cardsInPool.pop());
-
         }
         
         // make elements for each of the cards in the shop
         func.makeCardElements(global.cardsInShop);
-
-
-        // make listeners too
-        
-        // 
-
-        // make your creatures clickable so you can sell them if you want
-        // later
-
-
-        for (cards in global.cardsInPool) {
-
-        }
 
     },
 
     // buy a card from the shop
     buyCard(event) {
 
-        func.checkRowSize();
+        // check if the player has too many cards - limit 5
+        if (global.activePlayer.cardsInPlay.length >= 5) {
+            return alert('You have too many creatures');
+        }
 
         // decrement player money
         global.activePlayer.coins -= 3;
@@ -241,6 +240,7 @@ const func = {
         // check if player can buy more items
         if (global.activePlayer.coins < 3 || global.activePlayer.coins < tierUpgradeCost) {
 
+            // modal alert
             // COMBAT 
         }
 
@@ -265,18 +265,34 @@ const func = {
     },
 
     // refresh the shop
-    refreshShop() {
+    refreshShop(event) {
+
+        global.cardsInShop = [];
+        $('.buy .card-container').remove();
+        func.startBuyRound(global.activePlayer.currentTier);
 
     },
 
     // upgrade tier
     upgradeTier() {
 
+        // check if player has enough money to upgrade
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<uncomment
+        // if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
+        //     return (console.log('not enough coins'));
+        // }
+
+        // decrement players coins
+        global.activePlayer.coins -= global.activePlayer.tierUpgradeCost;
+        console.log(global.activePlayer.coins);
+
         // increment tier and upgrade cost
         global.activePlayer.currentTier++;
         global.activePlayer.tierUpgradeCost++;
 
-        // 
+        // update dom
+       $('.tier-title').text(`Tier ${global.activePlayer.currentTier}`);
+       $('.tier-cost').text(global.activePlayer.tierUpgradeCost);
 
     },
 
@@ -307,15 +323,6 @@ const func = {
         // max is *not* inclusive - low is inclusive
         return Math.floor(Math.random() * (max - min) + min);
     
-    },
-
-    // check row size (limit 7)
-    checkRowSize() {
-
-        if (global.activePlayer.cardsInPlay.length >= 7) {
-            console.log('too many cards in row');
-        }
-
     },
 
     // shuffle cards
@@ -365,8 +372,9 @@ const func = {
 
     const handle = {
 
-        playbutton: $('.play-btn').on('click', func.startGame),
-
+        playButton: $('.play-btn').on('click', func.startGame),
+        tierUpgrade: $('.current-tier').on('click', func.upgradeTier),
+        refreshButton: $('.refresh-tier').on('click', func.refreshShop),
     }
 
 //////////////////////////
