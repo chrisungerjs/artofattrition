@@ -262,14 +262,14 @@ const func = {
 
     },
 
-    // sell a card to the shop // need to finish
+    // sell a card to the shop
     sellCard(event) {
 
         // increment player coins
         global.activePlayer.coins += 1;
         func.updateCoins();
 
-        // identify the id to get the object index
+        // identify the current id to get the object index
         const soldCardId = event.currentTarget.id;
         const soldCard = global.activePlayer.cardsInPlay[soldCardId];
         
@@ -279,9 +279,15 @@ const func = {
         // remove the card from the player array
         soldCard.toRemove = true;
         global.activePlayer.cardsInPlay = global.activePlayer.cardsInPlay.filter((value) => value.toRemove === false);
-        console.log(global.activePlayer.cardsInPlay);
+        // console.log(global.activePlayer.cardsInPlay);
 
+        // reset ids 
+        const $elementList = $('.card-container.in-player-row');
+        let i = 0;
+        $elementList.each((value) => {
 
+            $elementList[value].id = value;
+        })
 
     },
 
