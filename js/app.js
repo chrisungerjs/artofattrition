@@ -70,6 +70,7 @@ const func = {
         $('.buy').toggleClass('hidden');
         $('.current-tier').toggleClass('hidden');
         $('.refresh-tier').toggleClass('hidden');
+        $('.coins').toggleClass('hidden');
 
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
@@ -229,8 +230,8 @@ const func = {
     // buy a card from the shop
     buyCard(event) {
 
-        // check if the player has too many cards - limit 7
-        if (global.activePlayer.cardsInPlay.length >= 7) {
+        // check if the player has too many cards - limit 5
+        if (global.activePlayer.cardsInPlay.length >= 5) {
             return alert('You have too many minions. Sell one');
         }
 
