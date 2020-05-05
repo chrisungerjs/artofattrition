@@ -415,7 +415,7 @@ const func = {
         const tier = 'enemy-' + global.currentEnemyTier;
         const power = currentEnemy.power;
         const health = currentEnemy.health;
-        const rarity = 'enemy';
+        const rarity = '';
 
         const enemyElement = func.makeCard(id, tier, power, health, rarity);
         $('.player-2').append(enemyElement);
@@ -452,18 +452,33 @@ const func = {
         // generate a random card from enemy array
         const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
         const enemyCardObj = enemyCards[randomEnemyId];
-        const $enemyCard = $(`.enemy:nth-of-type(${randomEnemyId + 1})`);
+        const $enemyCard = $(`#enemy:nth-of-type(${randomEnemyId + 1})`);
         const $enemyCardHealth = $(`#health-enemy`)
 
+        console.log($enemyCard)
+
         // apply damage
-        enemyCardObj.health -= playerCardObj.power;
         playerCardObj.health -= enemyCardObj.power;
+        enemyCardObj.health -= playerCardObj.power;
 
         console.log(enemyCardObj.health, playerCardObj.health);
 
         // update health on the dom
+        $playerCardHealth.text(playerCardObj.health).addClass('damaged')
+        $enemyCardHealth.text(enemyCardObj.health).addClass('damaged')
         
         // check if card dead and remove if so
+        setTimeout(() => {
+            if (playerCardObj.health <= 0) {
+                $playerCard.remove();
+                cardsInPlay.splice(randomPlayerId, 1);
+                console.log($playerCard);
+                console.log(cardsInPlay);
+            }
+            if (enemyCardObj.health <= 0) {
+                $enemyCard.remove();
+            }
+        }, 1000);
 
         // attackCard function - call it with a delay
     },

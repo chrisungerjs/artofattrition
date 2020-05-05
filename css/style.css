@@ -433,7 +433,7 @@ html {
 
 /* Enemy Card Images */
 
-.tier-1-enemy {
+.tier-enemy-1- {
     background: url(../img/card-images/enemies/1.png);
 }
 
@@ -538,6 +538,10 @@ html {
     display: inline;
     text-shadow: 2px 2px 2px rgba(51,51,51,0.5);
 
+}
+
+.damaged {
+    color: red;
 }
 
 .in-player-row {
