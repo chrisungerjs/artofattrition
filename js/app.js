@@ -256,6 +256,7 @@ const func = {
 
         // empty the current pool 
         global.cardsInPool = [];
+        $('.buy .card-container').remove();
 
         // generate the new card pool - pass the activeplayer's current tier
         func.generatePool(tier);
@@ -270,6 +271,7 @@ const func = {
         for (let i = 0; i < shopQty; i++) {
 
             global.cardsInShop.push(global.cardsInPool.pop());
+
         }
         
         // make elements for each of the cards in the shop
@@ -448,7 +450,12 @@ const func = {
 
         // check if either player has 0 creatures before continuing
         if (enemyCards.length <= 0 || cardsInPlay.length <= 0) {
-            return console.log('combat over')
+
+            global.cardsInShop = [];
+            $('.buy').toggleClass('hidden');
+            func.toggleShop();
+            func.startBuyRound(global.activePlayer.currentTier);
+            return;
 
         }
 
