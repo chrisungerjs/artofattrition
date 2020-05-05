@@ -245,6 +245,10 @@ const func = {
         func.updateTier();
         func.updateCoins();
 
+        $('.player-2.card-row').addClass('hidden');
+
+        // also reset enemy card progress
+
     },
 
     //////////////////////////
@@ -254,7 +258,7 @@ const func = {
     // start buy round
     startBuyRound(tier) {
 
-        $('.player-2.card-row').toggleClass('hidden');
+        $('.player-2.card-row').addClass('hidden');
 
         // empty the current pool 
         global.cardsInPool = [];
@@ -401,8 +405,6 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
 
-        $('.player-2').toggleClass('hidden');
-
         // toggle shop ui off
         func.toggleShop();
 
@@ -411,13 +413,15 @@ const func = {
         
         // empty buy row
         $('.buy').empty();
+
+        $('.player-2.card-row').removeClass('hidden');
         
         // make dom elements for enemy cards
         const currentEnemy = global.enemyPool.shift();
         global.enemyCards.push(currentEnemy);
         // console.log(currentEnemy)
 
-        const id = 'enemy';
+        const id = 'enemy'; // this needs to be changed
         const tier = 'enemy-' + global.currentEnemyTier;
         const power = currentEnemy.power;
         const health = currentEnemy.health;
@@ -437,9 +441,6 @@ const func = {
     },
 
     attackCard() {
-
-        
-        // go to combat resolution if so
         
         // reset player array Id's
         func.resetIds();
@@ -447,10 +448,6 @@ const func = {
         // get enemy and player cards
         const enemyCards = global.enemyCards;
         const cardsInPlay = global.activePlayer.cardsInPlay;
-        
-        console.log(enemyCards);
-        console.log(cardsInPlay);
-
 
         // check if either player has 0 creatures before continuing
         if (enemyCards.length <= 0 || cardsInPlay.length <= 0) {
@@ -472,16 +469,14 @@ const func = {
         // generate a random card from enemy array
         const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
         const enemyCardObj = enemyCards[randomEnemyId];
-        const $enemyCard = $(`#enemy:nth-of-type(${randomEnemyId + 1})`);
-        const $enemyCardHealth = $(`#health-enemy:nth-of-type(${randomEnemyId + 1})`)
-
-        console.log($enemyCard)
+        const $enemyCard = $('#enemy');
+        const $enemyCardHealth = $('#health-enemy.card-health');
+        console.log($enemyCardHealth.text);
 
         // apply damage
         playerCardObj.health -= enemyCardObj.power;
         enemyCardObj.health -= playerCardObj.power;
 
-        console.log(enemyCardObj.health, playerCardObj.health);
 
         // update health on the dom
         $playerCardHealth.text(playerCardObj.health).addClass('damaged')
