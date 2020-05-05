@@ -16,6 +16,7 @@ const global = {
         'flying-fortress',
         'ancient-tree',
     ],
+    enemyPool: [],
     enemyCards: [],
     currentEnemyTier: 1,
 
@@ -387,19 +388,20 @@ const func = {
 
         // toggle shop ui off
         func.toggleShop();
-        
+
         // toggle buy-row
         $('.buy').toggleClass('hidden');
         
         // empty buy row
         $('.buy').empty();
         
-        // make dom elements for enemy cards
-        const currentEnemy = global.enemyCards.shift();
-        console.log(currentEnemy)
+        // make dom elements for enemy cards //// this might be a for each 
+        const currentEnemy = global.enemyPool.shift();
+        global.enemyCards.push(currentEnemy);
+        // console.log(currentEnemy)
 
-        const id = 0;
-        const tier = global.currentEnemyTier;
+        const id = 'enemy';
+        const tier = 'enemy-' + global.currentEnemyTier;
         const power = currentEnemy.power;
         const health = currentEnemy.health;
         const rarity = 'enemy';
@@ -407,9 +409,36 @@ const func = {
         const enemyElement = func.makeCard(id, tier, power, health, rarity);
         $('.player-2').append(enemyElement);
 
+        // increment enemy tier
         global.currentEnemyTier++;
 
-        // random player card attacks (random) enemy card
+        // trigger attack function
+        setTimeout(() => {
+            func.attackCard();
+        }, 1000);
+
+    },
+
+    attackCard() {
+
+        const enemyCards = global.enemyCards;
+
+        const cardsInPlay = global.activePlayer.cardsInPlay;
+
+        // generate a random index from cards in play array
+        const randomPlayerId = func.randomNumberBetween(0, cardsInPlay.length);
+
+        // generate a random index from enemy cards array
+        const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
+
+        // trigger animation - class toggle function
+
+        // random player card
+        const $playerCard = $(`#${randomPlayerId}`);
+        
+        // random enemy card
+        const $enemyCard = $(`.enemy:nth-of-type(${randomEnemyId + 1})`);
+        console.log($enemyCard);
 
         // attackCard function - call it with a delay
         
@@ -419,7 +448,7 @@ const func = {
 
         for (i = 0; i < 10; i++) {
 
-            global.enemyCards.push(new Card(i, 'common', i + 1, i + 2));
+            global.enemyPool.push(new Card(i, 'common', i + 1, i + 2));
         }
     },
 
