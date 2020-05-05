@@ -402,6 +402,7 @@ const func = {
     startCombat() {
 
         $('.player-2').toggleClass('hidden');
+
         // toggle shop ui off
         func.toggleShop();
 
