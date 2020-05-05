@@ -432,16 +432,25 @@ const func = {
 
     attackCard() {
 
-        // check if either player has 0 creatures before continuing
-
+        
         // go to combat resolution if so
-
+        
         // reset player array Id's
         func.resetIds();
-
+        
         // get enemy and player cards
         const enemyCards = global.enemyCards;
         const cardsInPlay = global.activePlayer.cardsInPlay;
+        
+        console.log(enemyCards);
+        console.log(cardsInPlay);
+
+
+        // check if either player has 0 creatures before continuing
+        if (enemyCards.length <= 0 || cardsInPlay.length <= 0) {
+            return console.log('combat over')
+
+        }
 
         // generate a random card from player array
         const randomPlayerId = func.randomNumberBetween(0, cardsInPlay.length);
@@ -470,17 +479,25 @@ const func = {
         // check if card dead and remove if so
         setTimeout(() => {
             if (playerCardObj.health <= 0) {
+
                 $playerCard.remove();
                 cardsInPlay.splice(randomPlayerId, 1);
-                console.log($playerCard);
-                console.log(cardsInPlay);
+
             }
             if (enemyCardObj.health <= 0) {
+
                 $enemyCard.remove();
+                enemyCards.splice(randomEnemyId, 1);
+
             }
+
+            // call attack again
+            setTimeout(() => {
+
+                func.attackCard();
+            }, 1000);
         }, 1000);
 
-        // attackCard function - call it with a delay
     },
 
     generateEnemies() {
@@ -491,21 +508,20 @@ const func = {
         }
     },
 
-    // check win state
+    // check win state<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     checkWin() {
 
     },
 
-    // check loss state
+    // check loss state<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     checkLoss() {
-
     },
 
     //////////////////////////
     // Utilities
     //////////////////////////
     
-    // generate a random background image
+    // generate a background image
     generateBackground() {
     
         const randomIndex = this.randomNumberBetween(0, global.backgroundClasses.length);
@@ -556,7 +572,7 @@ const func = {
     // UI Functions
     //////////////////////////
     
-    // toggle hidden class on the title, play button, and social links
+    // toggle start ui
     toggleTitles() {
 
         $('.hero-text').toggleClass('hidden');
