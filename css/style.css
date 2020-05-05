@@ -319,6 +319,23 @@ html {
     background: url(../img/card-images/heroes/2-x.png);
 }
 
+/* Tier 3 */
+
+.tier-3-common {
+    background: url(../img/card-images/heroes/3-c.png);
+}
+
+.tier-3-uncommon-a {
+    background: url(../img/card-images/heroes/3-u-a.png)
+}
+
+.tier-3-uncommon-b {
+    background: url(../img/card-images/heroes/3-u-b.png);
+}
+
+.tier-3-rare {
+    background: url(../img/card-images/heroes/3-x.png);
+}
 
 
 
@@ -337,8 +354,41 @@ html {
     background: url(../img/card-images/enemies/1.png);
 }
 
+.tier-2-enemy {
+    background: url(../img/card-images/enemies/2.png);
+}
 
+.tier-3-enemy {
+    background: url(../img/card-images/enemies/3.png);
+}
 
+.tier-4-enemy {
+    background: url(../img/card-images/enemies/4.png);
+}
+
+.tier-5-enemy {
+    background: url(../img/card-images/enemies/5.png);
+}
+
+.tier-6-enemy {
+    background: url(../img/card-images/enemies/6.png);
+}
+
+.tier-7-enemy {
+    background: url(../img/card-images/enemies/7.png);
+}
+
+.tier-8-enemy {
+    background: url(../img/card-images/enemies/8.png);
+}
+
+.tier-9-enemy {
+    background: url(../img/card-images/enemies/9.png);
+}
+
+.tier-10-enemy {
+    background: url(../img/card-images/enemies/10.png);
+}
 
 
 .card-image {
