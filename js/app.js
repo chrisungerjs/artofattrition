@@ -388,6 +388,9 @@ const func = {
         // toggle shop ui off
         func.toggleShop();
         
+        // toggle buy-row
+        $('.buy').toggleClass('hidden');
+        
         // empty buy row
         $('.buy').empty();
         
