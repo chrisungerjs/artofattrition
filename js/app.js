@@ -406,8 +406,6 @@ const func = {
 
         global.currentEnemyTier++;
 
-        // if it is, generate a new enemy
-
         // random player card attacks (random) enemy card
 
         // attackCard function - call it with a delay

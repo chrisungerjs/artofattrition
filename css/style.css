@@ -337,12 +337,95 @@ html {
     background: url(../img/card-images/heroes/3-x.png);
 }
 
+/* Tier 4 */
 
+.tier-4-common {
+    background: url(../img/card-images/heroes/4-c.png);
+}
 
+.tier-4-uncommon-a {
+    background: url(../img/card-images/heroes/4-u-a.png)
+}
 
+.tier-4-uncommon-b {
+    background: url(../img/card-images/heroes/4-u-b.png);
+}
 
+.tier-4-rare {
+    background: url(../img/card-images/heroes/4-x.png);
+}
 
+/* Tier 5 */
 
+.tier-5-common {
+    background: url(../img/card-images/heroes/5-c.png);
+}
+
+.tier-5-uncommon-a {
+    background: url(../img/card-images/heroes/5-u-a.png)
+}
+
+.tier-5-uncommon-b {
+    background: url(../img/card-images/heroes/5-u-b.png);
+}
+
+.tier-5-rare {
+    background: url(../img/card-images/heroes/5-x.png);
+}
+
+/* Tier 6 */
+
+.tier-6-common {
+    background: url(../img/card-images/heroes/6-c.png);
+}
+
+.tier-6-uncommon-a {
+    background: url(../img/card-images/heroes/6-u-a.png)
+}
+
+.tier-6-uncommon-b {
+    background: url(../img/card-images/heroes/6-u-b.png);
+}
+
+.tier-6-rare {
+    background: url(../img/card-images/heroes/6-x.png);
+}
+
+/* Tier 7 */
+
+.tier-7-common {
+    background: url(../img/card-images/heroes/7-c.png);
+}
+
+.tier-7-uncommon-a {
+    background: url(../img/card-images/heroes/7-u-a.png)
+}
+
+.tier-7-uncommon-b {
+    background: url(../img/card-images/heroes/7-u-b.png);
+}
+
+.tier-7-rare {
+    background: url(../img/card-images/heroes/7-x.png);
+}
+
+/* Tier 8 */
+
+.tier-8-common {
+    background: url(../img/card-images/heroes/8-c.png);
+}
+
+.tier-8-uncommon-a {
+    background: url(../img/card-images/heroes/8-u-a.png)
+}
+
+.tier-8-uncommon-b {
+    background: url(../img/card-images/heroes/8-u-b.png);
+}
+
+.tier-8-rare {
+    background: url(../img/card-images/heroes/8-x.png);
+}
 
 
 
