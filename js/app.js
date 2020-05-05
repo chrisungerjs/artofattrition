@@ -358,6 +358,22 @@ const func = {
         }
     },
 
+    resetEnemyIds() {
+
+        // get element lists
+        const $enemyCardList = $('.player-2 > .card-container');
+        const $enemyHealthList = $('.player-2 .card-health');
+
+        // loop through and reset ids
+        for (let i = 0; i < $enemyCardList.length; i++) {
+            
+            $enemyCardList[i].id = 'enemy-' + i;
+            $enemyHealthList[i].id = 'health-enemy-' + i;
+
+        }
+
+    },
+
     // refresh the shop
     refreshShop(event) {
 
@@ -414,21 +430,27 @@ const func = {
         // empty buy row
         $('.buy').empty();
 
-        $('.player-2.card-row').removeClass('hidden');
+        $('.player-2.card-row').removeClass('hidden').empty();
         
-        // make dom elements for enemy cards
+        // push a new enemy to the enemy card row
         const currentEnemy = global.enemyPool.shift();
         global.enemyCards.push(currentEnemy);
-        // console.log(currentEnemy)
 
-        const id = 'enemy'; // this needs to be changed
-        const tier = 'enemy-' + global.currentEnemyTier;
-        const power = currentEnemy.power;
-        const health = currentEnemy.health;
-        const rarity = 'common';
+        // make dom elements for the enemy cards
+        for (let i = 0; i < global.enemyCards.length; i++) {
 
-        const enemyElement = func.makeCard(id, tier, power, health, rarity);
-        $('.player-2').append(enemyElement);
+            const enemy = global.enemyCards[i];
+
+            const id = 'enemy-' + i;
+            const tier = 'enemy-' + (enemy.tier + 1);
+            const power = enemy.power;
+            const health = enemy.health;
+            const rarity = 'common';
+        
+            const enemyElement = func.makeCard(id, tier, power, health, rarity);
+            $('.player-2').append(enemyElement);
+        
+        }
 
         // increment enemy tier
         global.currentEnemyTier++;
@@ -442,8 +464,9 @@ const func = {
 
     attackCard() {
         
-        // reset player array Id's
+        // reset card array Id's
         func.resetIds();
+        func.resetEnemyIds();
         
         // get enemy and player cards
         const enemyCards = global.enemyCards;
@@ -469,9 +492,8 @@ const func = {
         // generate a random card from enemy array
         const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
         const enemyCardObj = enemyCards[randomEnemyId];
-        const $enemyCard = $('#enemy');
-        const $enemyCardHealth = $('#health-enemy.card-health');
-        console.log($enemyCardHealth.text);
+        const $enemyCard = $(`#enemy-${randomEnemyId}`);
+        const $enemyCardHealth = $(`#health-enemy-${randomEnemyId}.card-health`);
 
         // apply damage
         playerCardObj.health -= enemyCardObj.power;
