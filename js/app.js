@@ -215,7 +215,7 @@ const func = {
                 <div class="power-health">
                     <div class="card-power">${power}</div>
                     <div class="slash">/</div>
-                    <div class="card-health">${health}</div>
+                    <div class="card-health" id="health-${id}">${health}</div>
                 </div>
             </div>
         </div>
@@ -330,13 +330,25 @@ const func = {
         global.activePlayer.cardsInPlay = global.activePlayer.cardsInPlay.filter((value) => value.toRemove === false);
 
         // reset ids 
-        const $elementList = $('.card-container.in-player-row');
-        let i = 0;
-        $elementList.each((value) => {
+        func.resetIds();
 
-            $elementList[value].id = value;
-        })
+    },
 
+    // reset Id's
+    resetIds() {
+
+        const $cardList = $('.card-container.in-player-row');
+        const $healthList = $('.in-player-row .card-health')
+        console.log($healthList);
+
+        console.log($cardList);
+        
+        for (let i = 0; i < $cardList.length; i++) {
+
+            $cardList[i].id = i;
+            $healthList[i].id = 'health-' + i;
+
+        }
     },
 
     // refresh the shop
@@ -421,27 +433,32 @@ const func = {
 
     attackCard() {
 
-        const enemyCards = global.enemyCards;
+        // reset player array Id's
+        func.resetIds();
 
+        // get enemy and player cards
+        const enemyCards = global.enemyCards;
         const cardsInPlay = global.activePlayer.cardsInPlay;
 
-        // generate a random index from cards in play array
+        // generate a random index from player array
         const randomPlayerId = func.randomNumberBetween(0, cardsInPlay.length);
-
-        // generate a random index from enemy cards array
-        const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
-
-        // trigger animation - class toggle function
-
-        // random player card
+        const playerCardObj = cardsInPlay[randomPlayerId]; 
         const $playerCard = $(`#${randomPlayerId}`);
-        
-        // random enemy card
+        const $playerCardHealth = $(`#health-${randomPlayerId}`);
+        console.log(playerCardObj);
+        console.log($playerCardHealth);
+
+        // generate a random index from enemy array
+        const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
+        const enemyCardObj = enemyCards[randomEnemyId];
         const $enemyCard = $(`.enemy:nth-of-type(${randomEnemyId + 1})`);
-        console.log($enemyCard);
+        console.log(enemyCardObj);
+
+        // apply damage
+        // console.log(randomPlayerId)
 
         // attackCard function - call it with a delay
-        
+               
     },
 
     generateEnemies() {

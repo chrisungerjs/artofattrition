@@ -517,7 +517,7 @@ html {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     overflow: hidden;
     font-size: 4rem;
     color: white;
