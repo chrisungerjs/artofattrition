@@ -337,12 +337,11 @@ const func = {
     // reset Id's
     resetIds() {
 
+        // get element lists
         const $cardList = $('.card-container.in-player-row');
         const $healthList = $('.in-player-row .card-health')
-        console.log($healthList);
 
-        console.log($cardList);
-        
+        // loop through and reset ids
         for (let i = 0; i < $cardList.length; i++) {
 
             $cardList[i].id = i;
@@ -433,6 +432,10 @@ const func = {
 
     attackCard() {
 
+        // check if either player has 0 creatures before continuing
+
+        // go to combat resolution if so
+
         // reset player array Id's
         func.resetIds();
 
@@ -440,25 +443,29 @@ const func = {
         const enemyCards = global.enemyCards;
         const cardsInPlay = global.activePlayer.cardsInPlay;
 
-        // generate a random index from player array
+        // generate a random card from player array
         const randomPlayerId = func.randomNumberBetween(0, cardsInPlay.length);
-        const playerCardObj = cardsInPlay[randomPlayerId]; 
+        const playerCardObj = cardsInPlay[randomPlayerId];
         const $playerCard = $(`#${randomPlayerId}`);
         const $playerCardHealth = $(`#health-${randomPlayerId}`);
-        console.log(playerCardObj);
-        console.log($playerCardHealth);
 
-        // generate a random index from enemy array
+        // generate a random card from enemy array
         const randomEnemyId = func.randomNumberBetween(0, enemyCards.length);
         const enemyCardObj = enemyCards[randomEnemyId];
         const $enemyCard = $(`.enemy:nth-of-type(${randomEnemyId + 1})`);
-        console.log(enemyCardObj);
+        const $enemyCardHealth = $(`#health-enemy`)
 
         // apply damage
-        // console.log(randomPlayerId)
+        enemyCardObj.health -= playerCardObj.power;
+        playerCardObj.health -= enemyCardObj.power;
+
+        console.log(enemyCardObj.health, playerCardObj.health);
+
+        // update health on the dom
+        
+        // check if card dead and remove if so
 
         // attackCard function - call it with a delay
-               
     },
 
     generateEnemies() {
