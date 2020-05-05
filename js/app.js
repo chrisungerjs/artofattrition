@@ -425,7 +425,7 @@ const func = {
         const tier = 'enemy-' + global.currentEnemyTier;
         const power = currentEnemy.power;
         const health = currentEnemy.health;
-        const rarity = '';
+        const rarity = 'common';
 
         const enemyElement = func.makeCard(id, tier, power, health, rarity);
         $('.player-2').append(enemyElement);

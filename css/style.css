@@ -433,43 +433,43 @@ html {
 
 /* Enemy Card Images */
 
-.tier-enemy-1- {
+.tier-enemy-1-common {
     background: url(../img/card-images/enemies/1.png);
 }
 
-.tier-2-enemy {
+.tier-enemy-2-common {
     background: url(../img/card-images/enemies/2.png);
 }
 
-.tier-3-enemy {
+.tier-enemy-3-common {
     background: url(../img/card-images/enemies/3.png);
 }
 
-.tier-4-enemy {
+.tier-enemy-4-common {
     background: url(../img/card-images/enemies/4.png);
 }
 
-.tier-5-enemy {
+.tier-enemy-5-common {
     background: url(../img/card-images/enemies/5.png);
 }
 
-.tier-6-enemy {
+.tier-enemy-6-common {
     background: url(../img/card-images/enemies/6.png);
 }
 
-.tier-7-enemy {
+.tier-enemy-7-common {
     background: url(../img/card-images/enemies/7.png);
 }
 
-.tier-8-enemy {
+.tier-enemy-8-common {
     background: url(../img/card-images/enemies/8.png);
 }
 
-.tier-9-enemy {
+.tier-enemy-9-common {
     background: url(../img/card-images/enemies/9.png);
 }
 
-.tier-10-enemy {
+.tier-enemy-10-common {
     background: url(../img/card-images/enemies/10.png);
 }
 
