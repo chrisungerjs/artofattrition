@@ -254,6 +254,8 @@ const func = {
     // start buy round
     startBuyRound(tier) {
 
+        $('.player-2.card-row').toggleClass('hidden');
+
         // empty the current pool 
         global.cardsInPool = [];
         $('.buy .card-container').remove();
@@ -399,6 +401,8 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
 
+        $('.player-2').toggleClass('hidden');
+        
         // toggle shop ui off
         func.toggleShop();
 
@@ -408,7 +412,7 @@ const func = {
         // empty buy row
         $('.buy').empty();
         
-        // make dom elements for enemy cards //// this might be a for each 
+        // make dom elements for enemy cards
         const currentEnemy = global.enemyPool.shift();
         global.enemyCards.push(currentEnemy);
         // console.log(currentEnemy)
