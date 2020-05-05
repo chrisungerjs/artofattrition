@@ -271,6 +271,16 @@ html {
     overflow: hidden;
 }
 
+
+
+
+
+
+
+
+
+
+
 /* Card Images */
 
 /* Tier 1 */
@@ -321,8 +331,11 @@ html {
 
 
 
+/* Enemy Card Images */
 
-
+.tier-1-enemy {
+    background: url(../img/card-images/enemies/1.png);
+}
 
 
 
@@ -351,7 +364,8 @@ html {
     filter: brightness(200%);
 }
 
-.card-stat-container.common {
+.card-stat-container.common,
+.card-stat-container.enemy {
     background: var(--commonGradient);
 }
 

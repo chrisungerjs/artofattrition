@@ -17,6 +17,7 @@ const global = {
         'ancient-tree',
     ],
     enemyCards: [],
+    currentEnemyTier: 1,
 
 }
 
@@ -75,6 +76,9 @@ const func = {
 
         // start buy round
         func.startBuyRound(global.activePlayer.currentTier);
+
+        // make enemy cards
+        func.generateEnemies();
         
     },
     
@@ -151,7 +155,7 @@ const func = {
     },
 
     // generate card DOM elements
-    makeCardElements(cardArray) {    
+    makeshopCards(cardArray) {    
 
         // initialize counter for index IDs
         let indexId = 0;
@@ -160,6 +164,8 @@ const func = {
 
             const rarity = cardArray[card].rarity;
             const tier = cardArray[card].tier;
+            const power = cardArray[card].power;
+            const health = cardArray[card].health; 
 
             // add a utf star for each tier
             let tierStars = '';
@@ -180,27 +186,10 @@ const func = {
                 tierStars += tier;
             }
            
-            // add card elements to the dom
-            const cardElement = $('<div>').addClass('card-container').attr('id', indexId).html(`
+            // make dom elements
+            const cardElement = func.makeCard(indexId, tier, power, health, rarity, tierStars);
 
-                <div class="card-image tier-${tier}-${rarity}">
-                <div class="card-stat-container ${rarity}">
-                    <div class="card-stat-row">
-                        <div class="card-tier">
-                        ${tierStars}
-                        </div>
-                        <div class="power-health">
-                            <div class="card-power">${cardArray[card].power}</div>
-                            <div class="slash">/</div>
-                            <div class="card-health">${cardArray[card].health}</div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            `);
-
-            // add event listener <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Can I just put this in my global handler and if so how?
+            // add event listener 
             cardElement.on('click', (event) => func.buyCard(event));
             
             // append to the buy row
@@ -210,6 +199,28 @@ const func = {
             indexId++;
         }
     },
+
+    // make a card element
+    makeCard(id, tier, power, health, rarity = 'common', tierStars = '') {
+        
+        return $('<div>').addClass('card-container').attr('id', id).html(`
+
+        <div class="card-image tier-${tier}-${rarity}">
+        <div class="card-stat-container ${rarity}">
+            <div class="card-stat-row">
+                <div class="card-tier">
+                ${tierStars}
+                </div>
+                <div class="power-health">
+                    <div class="card-power">${power}</div>
+                    <div class="slash">/</div>
+                    <div class="card-health">${health}</div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    `)},
 
     reset() {
 
@@ -261,7 +272,7 @@ const func = {
         }
         
         // make elements for each of the cards in the shop
-        func.makeCardElements(global.cardsInShop);
+        func.makeshopCards(global.cardsInShop);
 
     },
 
@@ -374,15 +385,26 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
 
-        // make enemy cards
-
         // toggle shop ui off
         func.toggleShop();
-
+        
         // empty buy row
         $('.buy').empty();
+        
+        // make dom elements for enemy cards
+        const currentEnemy = global.enemyCards.shift();
+        console.log(currentEnemy)
 
-        // check if the enemy card array is empty
+        const id = 0;
+        const tier = global.currentEnemyTier;
+        const power = currentEnemy.power;
+        const health = currentEnemy.health;
+        const rarity = 'enemy';
+
+        const enemyElement = func.makeCard(id, tier, power, health, rarity);
+        $('.player-2').append(enemyElement);
+
+        global.currentEnemyTier++;
 
         // if it is, generate a new enemy
 
@@ -393,7 +415,11 @@ const func = {
     },
 
     generateEnemies() {
-        global.enemyCards.push()
+
+        for (i = 0; i < 10; i++) {
+
+            global.enemyCards.push(new Card(i, 'common', i + 1, i + 2));
+        }
     },
 
     // check win state
