@@ -726,8 +726,9 @@ const func = {
 
     toggleShopCombat() {
 
-        $('.refresh-tier').toggleClass('hidden');
+        $('.current-tier').toggleClass('hidden');
         $('.go-to-combat').toggleClass('hidden');
+
 
     },
 
