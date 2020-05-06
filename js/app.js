@@ -233,7 +233,8 @@ const func = {
         global.cardsInShop = [];
         global.cardsInPool = [];
         player.cardsInPlay = [];
-
+        global.enemyPool = [];
+        
         // empty the dom cards
         $('.card-container').remove();
 
@@ -248,6 +249,7 @@ const func = {
         $('.player-2.card-row').addClass('hidden');
 
         // also reset enemy card progress
+
 
     },
 
@@ -614,7 +616,9 @@ const func = {
 
         for (i = 0; i < 10; i++) {
 
-            global.enemyPool.push(new Card(i, 'common', i + 1, i + 2));
+            const chance = func.randomNumberBetween(0, 2);
+
+            global.enemyPool.push(new Card(i, 'common', i + 1, i + 1 + chance));
         }
     },
 
