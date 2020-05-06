@@ -568,6 +568,10 @@ const func = {
                 func.endCombatRound();
 
             }, 1000)
+        
+        } else {
+
+            func.youLose();
         }
     },
 
@@ -588,15 +592,11 @@ const func = {
         }
     },
 
-    // check win state<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    checkWin() {
+    youLose() {
 
-    },
+        alert('you lose!');
+        func.reset();
 
-    // check loss state<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    checkLoss() {
-
-        global.activePlayer.health <= 0 ? console.log('you lose') : func.endCombatRound();
     },
 
     //////////////////////////
