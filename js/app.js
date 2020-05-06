@@ -37,7 +37,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 3;
+        this.newCoinsPerRound = 30;
 
     }
 }
@@ -73,7 +73,7 @@ const func = {
         // ui functions
         func.generateBackground();
         func.toggleTitles();
-        func.toggleShop();
+        func.toggleShopOn();
         func.toggleCards();
         func.updateCoins();
         func.updateTier();
@@ -188,7 +188,7 @@ const func = {
                 }
             } else {
                 
-                tierStars += tier;
+                tierStars += '&#8734;';
             }
            
             // make dom elements
@@ -210,22 +210,22 @@ const func = {
         
         return $('<div>').addClass('card-container').attr('id', id).html(`
 
-        <div class="card-image tier-${tier}-${rarity}">
-        <div class="card-stat-container ${rarity}">
-            <div class="card-stat-row">
-                <div class="card-tier">
-                ${tierStars}
-                </div>
-                <div class="power-health">
-                    <div class="card-power">${power}</div>
-                    <div class="slash">/</div>
-                    <div class="card-health" id="health-${id}">${health}</div>
+            <div class="card-image tier-${tier}-${rarity}">
+            <div class="card-stat-container ${rarity}">
+                <div class="card-stat-row">
+                    <div class="card-tier">
+                    ${tierStars}
+                    </div>
+                    <div class="power-health">
+                        <div class="card-power">${power}</div>
+                        <div class="slash">/</div>
+                        <div class="card-health" id="health-${id}">${health}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
-
-    `)},
+            </div>
+        `)
+    },
 
     reset() {
 
@@ -244,7 +244,7 @@ const func = {
 
         // ui toggles - purposefully not resetting background image
         func.toggleTitles();
-        func.toggleShop();
+        func.toggleShopOn();
         func.toggleCards();
         func.updateTier();
         func.updateCoins();
@@ -294,6 +294,7 @@ const func = {
 
         // check if the player has too many cards - limit 6
         if (global.activePlayer.cardsInPlay.length >= 6) {
+
             return alert('You have too many minions. Sell one');
         }
 
@@ -301,11 +302,10 @@ const func = {
         global.activePlayer.coins -= 3;
         func.updateCoins();
 
-        // check if player can buy more items
-        if (global.activePlayer.coins < 3 || global.activePlayer.coins < tierUpgradeCost) {
-
-            // modal alert
-            // COMBAT 
+        // check if player can buy more items - can always refresh tier
+        if (global.activePlayer.coins < 3) {
+            
+            return alert("you don't have enough coins!");
         }
 
         // identify the id to find the corresponding object index
@@ -396,23 +396,28 @@ const func = {
 
     },
 
-    // set coins for this round
+    // set coins for round
     awardCoins() {
 
-        global.activePlayer.coins = global.activePlayer.newCoinsPerRound;
+        global.activePlayer.coins += global.activePlayer.newCoinsPerRound;
         func.updateCoins()
-        global.activePlayer.newCoinsPerRound++;
+        global.activePlayer.newCoinsPerRound += 2;
 
     },
 
     // upgrade tier
     upgradeTier() {
 
+
         // check if player has enough money to upgrade
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<uncomment
-        // if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
-        //     return (alert('not enough coins'));
-        // }
+        if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
+            return (alert('not enough coins'));
+        };
+
+        // check if player is already at tier 8
+        if (global.activePlayer.currentTier >= 8) {
+            return (alert('you are already at the highest tier'));
+        }
 
         // decrement players coins
         global.activePlayer.coins -= global.activePlayer.tierUpgradeCost;
@@ -435,7 +440,7 @@ const func = {
     startCombat() {
 
         // toggle shop ui off
-        func.toggleShop();
+        func.toggleShopCombat();
 
         // toggle buy-row
         $('.buy').toggleClass('hidden');
@@ -459,8 +464,9 @@ const func = {
             const power = enemy.power;
             const health = enemy.health;
             const rarity = 'common';
+            const tierStars = '&#9760';
         
-            const enemyElement = func.makeCard(id, tier, power, health, rarity);
+            const enemyElement = func.makeCard(id, tier, power, health, rarity, tierStars);
             $('.player-2').append(enemyElement);
         
         }
@@ -470,6 +476,7 @@ const func = {
 
         // trigger attack function
         setTimeout(() => {
+
             func.attackCard();
         }, 1000);
 
@@ -484,18 +491,16 @@ const func = {
         // get enemy and player cards
         const enemyCards = global.enemyCards;
         const cardsInPlay = global.activePlayer.cardsInPlay;
-
+        
         // check if either player has 0 creatures before continuing
-        if (enemyCards.length <= 0 || cardsInPlay.length <= 0) {
-
-            global.cardsInShop = [];
-            $('.buy').toggleClass('hidden');
-            func.toggleShop();
-            func.awardCoins()
-            func.startBuyRound(global.activePlayer.currentTier);
-            return;
-
-        }
+        if (cardsInPlay.length <= 0) {
+            
+            return func.attackPlayer();
+        } 
+        if (enemyCards.length <= 0) {
+            
+            return func.endCombatRound();
+        }        
 
         // generate a random card from player array
         const randomPlayerId = func.randomNumberBetween(0, cardsInPlay.length);
@@ -545,6 +550,36 @@ const func = {
 
     },
 
+    attackPlayer() {
+
+        // get enemy cards
+        const enemyCards = global.enemyCards;
+        
+        for (let i = 0; i < enemyCards.length; i++) {
+
+            global.activePlayer.health -= enemyCards[i].power;
+            func.updateHealth();
+        }
+
+        if (global.activePlayer.health >= 0) {
+
+            setTimeout(() => {
+
+                func.endCombatRound();
+
+            }, 1000)
+        }
+    },
+
+    endCombatRound() {
+        global.cardsInShop = [];
+        $('.buy').toggleClass('hidden');
+        func.toggleShopCombat();
+        func.awardCoins()
+        func.startBuyRound(global.activePlayer.currentTier);
+        return;
+    },
+
     generateEnemies() {
 
         for (i = 0; i < 10; i++) {
@@ -560,6 +595,8 @@ const func = {
 
     // check loss state<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     checkLoss() {
+
+        global.activePlayer.health <= 0 ? console.log('you lose') : func.endCombatRound();
     },
 
     //////////////////////////
@@ -627,13 +664,21 @@ const func = {
     },
 
     // toggle shop ui
-    toggleShop() {
+    toggleShopOn() {
 
         $('.coins').toggleClass('hidden');
         $('.current-tier').toggleClass('hidden');
         $('.refresh-tier').toggleClass('hidden');
         $('.go-to-combat').toggleClass('hidden');
         $('.reset-btn').toggleClass('hidden');
+    },
+
+    toggleShopCombat() {
+
+        $('.refresh-tier').toggleClass('hidden');
+        $('.go-to-combat').toggleClass('hidden');
+        $('.player-health-container').toggleClass('hidden');
+
     },
 
     // toggle card rows
@@ -655,6 +700,11 @@ const func = {
     updateCoins() {
 
         $('.coin-total').text(global.activePlayer.coins);
+    },
+
+    // update health
+    updateHealth() {
+        $('.player-health').text(global.activePlayer.health);
     },
 
 }

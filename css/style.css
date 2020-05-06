@@ -244,13 +244,13 @@ html {
     max-width: 18vw;
 }
 
-
+/* /////////////////////////////////////////////////////////////////////////Player 2//////////////////// */
 .player-2 {
-    height: 50%;
-    top: 5%;
+    height: 40%;
+    top: 15%;
     transform: translateX(-50%);
     z-index: -2000;
-    /* border: 3px solid gold; */
+    border: 3px solid gold;
 }
 
 
@@ -689,6 +689,23 @@ html {
     }
 
 }
+
+
+
+
+/* ////////////////////////////////////////////////////////////////////health */
+/* Health */
+.player-health {
+    color: white;
+    position: absolute;
+    font-size: 12vh;
+    font-weight: bold;
+    top: 1.5vh;
+    right: 3vh;
+    cursor: pointer
+}
+
+
 
 
 /* mobile styles */
