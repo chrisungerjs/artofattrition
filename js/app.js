@@ -33,7 +33,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 3;
+        this.newCoinsPerRound = 900;
 
     }
 }
@@ -554,10 +554,6 @@ const func = {
 
             if (enemyCardObj.health <= 0) {
 
-                // add coins equal to enemy tier
-                global.activePlayer.coins += 3;
-                func.updateCoins();
-
                 $enemyCard.remove();
                 enemyCards.splice(randomEnemyId, 1);
 
@@ -733,6 +729,10 @@ const func = {
 
     // update tier labels
     updateTier() {
+
+        if (global.activePlayer.currentTier >= 8) {
+            $('.upgrade-tier').remove();
+        }
 
         $('.tier-title').text(`Tier ${global.activePlayer.currentTier}`);
         $('.tier-cost').text(global.activePlayer.tierUpgradeCost);
