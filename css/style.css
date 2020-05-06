@@ -268,7 +268,7 @@ html {
     width: 32vh;
     border: 1px solid black;
     border-radius: .75em;
-    margin: 0 1rem;
+    margin: 0 1vh;
     position: relative;
     overflow: hidden;
 }
@@ -532,9 +532,6 @@ html {
     color: gold;
 }
 
-.power-health {
-}
-
 .power-health div {
     display: inline;
     text-shadow: var(--shadow);
@@ -680,9 +677,8 @@ html {
     position: absolute;
     font-size: 12vh;
     font-weight: bold;
-    top: 3vh;
-    right: 3vh;
-    cursor: pointer
+    top: 2vh;
+    right: 2vw;
 }
 
 .go-to-combat:hover {
@@ -731,6 +727,7 @@ html {
     height: 100%;
     width: 100%;
     background: var(--darkGradient);
+    z-index: 6000;
 }
 
 .modal-textbox {
@@ -743,6 +740,7 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: .5em;
+    cursor: pointer;
 }
 
 .modal-container {
@@ -766,6 +764,10 @@ html {
     right: 2vh;
     padding: 1vh;
     margin: 0;
+}
+
+.modal-btn:hover {
+
 }
 
 
@@ -799,8 +801,59 @@ html {
 
 }
 
+.win-background {
+    background: var(--dimGradient), url(../img/win.png);
+}
 
+.lose-background {
+    background: var(--dimGradient), url(../img/Siege.png), var(--darkGradient), var(--darkGradient);
+}
 
+.win-background,
+.lose-background {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size:cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.win,
+.lose {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5000;
+}
+
+.win-textbox,
+.lose-textbox {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.win-text,
+.lose-text {
+    font-family: var(--titleFont);
+    font-weight: 900;
+    font-size: 30vh;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    letter-spacing: 1.2vh;
+    line-height: 30vh;
+    transform: translate(-50%, -50%);
+    text-shadow: var(--shadow), var(--shadow);
+}
 
 
 

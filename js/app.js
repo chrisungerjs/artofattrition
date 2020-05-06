@@ -19,6 +19,7 @@ const global = {
     enemyPool: [],
     enemyCards: [],
     currentEnemyTier: 1,
+    modalText: '',
 
 }
 
@@ -33,7 +34,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 3;
+        this.newCoinsPerRound = 300;
 
     }
 }
@@ -302,7 +303,9 @@ const func = {
         // check if the player has too many cards - limit 6
         if (global.activePlayer.cardsInPlay.length >= 6) {
 
-            return alert('You have too many minions. Sell one');
+            global.modalText = 'You have too many minions. Sell one to free up space';
+
+            return func.updateModal();
         }
    
         // check if player can buy more items - can always refresh tier
@@ -565,7 +568,7 @@ const func = {
             if (enemyCardObj.health <= 0) {
                 
                 $enemyCard.remove();
-                global.activePlayer.coins += enemyCardObj.tier;
+                global.activePlayer.coins += 2;
                 func.updateCoins();
                 enemyCards.splice(randomEnemyId, 1);
 
@@ -640,14 +643,32 @@ const func = {
 
     youWin() {
 
-        alert('you win');
+        $('body').empty();
+
+        $('body').append('<div>').addClass('win-background').html(`
+        
+            <div class="win">
+                <div class="win-textbox">
+                    <div class="win-text">YOU WIN</div>
+                </div>
+            </div>
+        
+        `).on('click', func.reset);
     },
 
     youLose() {
 
-        alert('you lose!');
-        func.reset();
+        $('body').empty();
 
+        $('body').append('<div>').addClass('lose-background').html(`
+        
+            <div class="lose">
+                <div class="lose-textbox">
+                    <div class="lose-text">YOU LOSE</div>
+                </div>
+            </div>
+        
+        `).on('click', func.reset);
     },
 
     //////////////////////////
@@ -764,8 +785,13 @@ const func = {
         $('.player-health').text(global.activePlayer.health);
     },
 
-}
+    updateModal() {
 
+        $('.modal-text').text(global.modalText);
+        $('.modal').toggleClass('hidden');
+    },
+    
+}        
 //////////////////////////
 // Event Handlers
 //////////////////////////
@@ -777,6 +803,7 @@ const handle = {
         refreshButton: $('.refresh-tier').on('click', func.refreshShop),
         combatButton: $('.go-to-combat').on('click', func.startCombat),
         resetButton: $('.reset-btn').on('click', func.reset),
+        toggleModal: $('.modal').on('click', () => $('.modal').toggleClass('hidden'))
 }
 
 // Player 1
