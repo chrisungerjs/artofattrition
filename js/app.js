@@ -33,7 +33,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 300;
+        this.newCoinsPerRound = 3;
 
     }
 }
@@ -88,10 +88,10 @@ const func = {
     generatePool(tier) { 
 
         // variables
-        const totalCommons = 10;
-        const totalUncommonAs = 4;
-        const totalUncommonBs = 4;
-        const totalRares = 2;
+        const totalCommons = 8;
+        const totalUncommonAs = 3;
+        const totalUncommonBs = 3;
+        const totalRares = 1;
         
         // make commons
         for (let i = 0; i < totalCommons; i++) {
@@ -271,8 +271,10 @@ const func = {
 
         $('.player-2.card-row').addClass('hidden');
 
-        // empty the current pool 
-        global.cardsInPool = [];
+        // empty the current pool - disabled for testing
+        // global.cardsInPool = [];
+
+        // remove old dom cards
         $('.buy .card-container').remove();
 
         // generate the new card pool - pass the activeplayer's current tier

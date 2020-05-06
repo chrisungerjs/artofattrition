@@ -802,7 +802,7 @@ html {
 }
 
 .win-background {
-    background: var(--dimGradient), url(../img/win.png);
+    background: var(--dimGradient), url(../img/win.png), var(--darkGradient), var(--darkGradient);
 }
 
 .lose-background {
