@@ -788,9 +788,11 @@ const func = {
 
     // update health
     updateHealth() {
+
         $('.player-health').text(global.activePlayer.health);
     },
 
+    // update modal text
     updateModal() {
 
         $('.modal-text').text(global.modalText);
