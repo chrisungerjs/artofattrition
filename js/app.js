@@ -381,11 +381,9 @@ const func = {
     // refresh the shop
     refreshShop(event) {
 
-        // check coins function - canIPay
-
-        // decrement player coins and update ui
-        global.activePlayer.coins -= 1;
-        func.updateCoins();
+        // decrement player coins and update ui - currently disabled
+        // global.activePlayer.coins -= 1;
+        // func.updateCoins();
 
         // empty the shop array and ui
         global.cardsInShop = [];
@@ -429,6 +427,9 @@ const func = {
 
         // update dom
        func.updateTier();
+
+       // refresh the shop
+       func.refreshShop();
 
     },
 
