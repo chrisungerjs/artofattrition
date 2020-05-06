@@ -30,11 +30,14 @@ class Player {
     constructor (name) {
 
         this.name = name;
-        this.health = 20;
+        this.health = 30;
         this.cardsInPlay = [];
-        this.coins = 3;
+
         this.currentTier = 1;
         this.tierUpgradeCost = 4;
+        
+        this.coins = 0;
+        this.newCoinsPerRound = 3;
 
     }
 }
@@ -76,6 +79,7 @@ const func = {
         func.updateTier();
 
         // start buy round
+        func.awardCoins()
         func.startBuyRound(global.activePlayer.currentTier);
 
         // make enemy cards
@@ -392,6 +396,15 @@ const func = {
 
     },
 
+    // set coins for this round
+    awardCoins() {
+
+        global.activePlayer.coins = global.activePlayer.newCoinsPerRound;
+        func.updateCoins()
+        global.activePlayer.newCoinsPerRound++;
+
+    },
+
     // upgrade tier
     upgradeTier() {
 
@@ -478,6 +491,7 @@ const func = {
             global.cardsInShop = [];
             $('.buy').toggleClass('hidden');
             func.toggleShop();
+            func.awardCoins()
             func.startBuyRound(global.activePlayer.currentTier);
             return;
 
@@ -506,12 +520,14 @@ const func = {
         
         // check if card dead and remove if so
         setTimeout(() => {
+
             if (playerCardObj.health <= 0) {
 
                 $playerCard.remove();
                 cardsInPlay.splice(randomPlayerId, 1);
 
             }
+
             if (enemyCardObj.health <= 0) {
 
                 $enemyCard.remove();
@@ -524,6 +540,7 @@ const func = {
 
                 func.attackCard();
             }, 1000);
+
         }, 1000);
 
     },
