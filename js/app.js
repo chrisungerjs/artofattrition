@@ -1,5 +1,5 @@
 //////////////////////////
-// Global Variables
+// Global Variables and Classes
 //////////////////////////
 
 const global = {
@@ -22,10 +22,6 @@ const global = {
 
 }
 
-//////////////////////////
-// Classes
-//////////////////////////
-
 class Player {
     constructor (name) {
 
@@ -37,7 +33,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 30;
+        this.newCoinsPerRound = 3;
 
     }
 }
@@ -297,16 +293,16 @@ const func = {
 
             return alert('You have too many minions. Sell one');
         }
-
-        // decrement player money
-        global.activePlayer.coins -= 3;
-        func.updateCoins();
-
+   
         // check if player can buy more items - can always refresh tier
         if (global.activePlayer.coins < 3) {
             
             return alert("you don't have enough coins!");
         }
+
+        // decrement player money
+        global.activePlayer.coins -= 3;
+        func.updateCoins();
 
         // identify the id to find the corresponding object index
         const boughtCardId = event.currentTarget.id;
@@ -320,6 +316,17 @@ const func = {
         cardElement.attr('id', global.activePlayer.cardsInPlay.length - 1)
         cardElement.on('click', func.sellCard);
         cardElement.addClass('in-player-row').appendTo($('.player-1'));
+
+        // go to combat if player can't buy any more minions
+        if (global.activePlayer.coins < 3) {
+
+            setTimeout(() => {
+
+                // alert('going to combat');
+                func.startCombat();
+            
+            }, 1000);
+        }
 
     },
 
@@ -399,7 +406,7 @@ const func = {
 
         global.activePlayer.coins += global.activePlayer.newCoinsPerRound;
         func.updateCoins()
-        global.activePlayer.newCoinsPerRound += 2;
+        global.activePlayer.newCoinsPerRound += 1;
 
     },
 
@@ -423,7 +430,7 @@ const func = {
 
         // increment tier and upgrade cost
         global.activePlayer.currentTier++;
-        global.activePlayer.tierUpgradeCost++;
+        global.activePlayer.tierUpgradeCost = global.activePlayer.currentTier + 3;
 
         // update dom
        func.updateTier();
@@ -484,6 +491,14 @@ const func = {
     },
 
     attackCard() {
+
+        if (global.enemyPool.length <= 0) {
+            return setTimeout(() => {
+                
+                func.youWin();
+            
+            }, 1000)
+        }
         
         // reset card array Id's
         func.resetIds();
@@ -527,17 +542,21 @@ const func = {
         // check if card dead and remove if so
         setTimeout(() => {
 
+            if (enemyCardObj.health <= 0) {
+
+                // add coins equal to enemy tier
+                global.activePlayer.coins += 3;
+                func.updateCoins();
+
+                $enemyCard.remove();
+                enemyCards.splice(randomEnemyId, 1);
+
+            }
+
             if (playerCardObj.health <= 0) {
 
                 $playerCard.remove();
                 cardsInPlay.splice(randomPlayerId, 1);
-
-            }
-
-            if (enemyCardObj.health <= 0) {
-
-                $enemyCard.remove();
-                enemyCards.splice(randomEnemyId, 1);
 
             }
 
@@ -562,7 +581,7 @@ const func = {
             func.updateHealth();
         }
 
-        if (global.activePlayer.health >= 0) {
+        if (global.activePlayer.health > 0) {
 
             setTimeout(() => {
 
@@ -572,7 +591,11 @@ const func = {
         
         } else {
 
-            func.youLose();
+            setTimeout(() => {
+                
+                func.youLose();
+            
+            }, 1000);
         }
     },
 
@@ -581,6 +604,8 @@ const func = {
         $('.buy').toggleClass('hidden');
         func.toggleShopCombat();
         func.awardCoins()
+        global.activePlayer.tierUpgradeCost--;
+        func.updateTier();
         func.startBuyRound(global.activePlayer.currentTier);
         return;
     },
@@ -591,6 +616,11 @@ const func = {
 
             global.enemyPool.push(new Card(i, 'common', i + 1, i + 2));
         }
+    },
+
+    youWin() {
+
+        alert('you win');
     },
 
     youLose() {
@@ -709,21 +739,19 @@ const func = {
     },
 
 }
+
 //////////////////////////
 // Event Handlers
 //////////////////////////
 
-    const handle = {
+const handle = {
 
         playButton: $('.play-btn').on('click', func.startGame),
         tierUpgrade: $('.current-tier').on('click', func.upgradeTier),
         refreshButton: $('.refresh-tier').on('click', func.refreshShop),
         combatButton: $('.go-to-combat').on('click', func.startCombat),
         resetButton: $('.reset-btn').on('click', func.reset),
-    }
+}
 
-//////////////////////////
-// App Logic
-//////////////////////////
-
+// Player 1
 let player1 = new Player('Player 1');
