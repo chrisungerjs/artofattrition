@@ -521,7 +521,7 @@ const func = {
 
     attackCard() {
 
-        if (global.enemyPool.length <= 0) {
+        if (global.enemyPool.length <= 0 && global.enemyCards.length <= 0) {
             return setTimeout(() => {
                 
                 func.youWin();
