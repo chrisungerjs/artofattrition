@@ -33,7 +33,7 @@ class Player {
         this.tierUpgradeCost = 4;
         
         this.coins = 0;
-        this.newCoinsPerRound = 900;
+        this.newCoinsPerRound = 3;
 
     }
 }
@@ -73,6 +73,7 @@ const func = {
         func.toggleCards();
         func.updateCoins();
         func.updateTier();
+        $('.player-health-container').toggleClass('hidden');
 
         // start buy round
         func.awardCoins()
@@ -332,7 +333,6 @@ const func = {
 
             setTimeout(() => {
 
-                // alert('going to combat');
                 func.startCombat();
             
             }, 1000);
@@ -442,12 +442,22 @@ const func = {
         global.activePlayer.currentTier++;
         global.activePlayer.tierUpgradeCost = global.activePlayer.currentTier + 3;
 
+        
         // update dom
-       func.updateTier();
+        func.updateTier();
+        
+        // refresh the shop
+        func.refreshShop();
+        
+        // check if player can still buy minions
+        if (global.activePlayer.coins < 3) {
 
-       // refresh the shop
-       func.refreshShop();
+            setTimeout(() => {
 
+                func.startCombat();
+
+            }, 1000);
+        }
     },
 
     //////////////////////////
@@ -553,8 +563,10 @@ const func = {
         setTimeout(() => {
 
             if (enemyCardObj.health <= 0) {
-
+                
                 $enemyCard.remove();
+                global.activePlayer.coins += enemyCardObj.tier;
+                func.updateCoins();
                 enemyCards.splice(randomEnemyId, 1);
 
             }
@@ -716,7 +728,6 @@ const func = {
 
         $('.refresh-tier').toggleClass('hidden');
         $('.go-to-combat').toggleClass('hidden');
-        $('.player-health-container').toggleClass('hidden');
 
     },
 
@@ -730,7 +741,9 @@ const func = {
     // update tier labels
     updateTier() {
 
+        // if tier is already 8, remove the upgrade cost from the dom
         if (global.activePlayer.currentTier >= 8) {
+
             $('.upgrade-tier').remove();
         }
 

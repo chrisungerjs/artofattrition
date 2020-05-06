@@ -658,6 +658,24 @@ html {
 .go-to-combat {
     color: white;
     position: absolute;
+    top: 4vh;
+    right: 19vh;
+    font-size: 7vh;
+    cursor: pointer;
+}
+
+.go-to-combat:hover {
+    filter: brightness(85%);
+}
+
+.go-to-combat:active {
+    filter: brightness(115%);
+}
+
+
+.player-health-container {
+    color: white;
+    position: absolute;
     font-size: 12vh;
     font-weight: bold;
     top: 3vh;
@@ -691,19 +709,6 @@ html {
 }
 
 
-
-
-/* ////////////////////////////////////////////////////////////////////health */
-/* Health */
-.player-health-container {
-    color: white;
-    position: absolute;
-    font-size: 12vh;
-    font-weight: bold;
-    top: 1.5vh;
-    right: 3vh;
-    cursor: pointer
-}
 
 
 
