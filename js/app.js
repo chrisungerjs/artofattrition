@@ -225,31 +225,39 @@ const func = {
 
     reset() {
 
-        player1 = {};
-        player1 = new Player('Player 1');
-        const player = global.activePlayer;
+        // returning to fix bugs so I can save user data locally - just reloading page for now
+        location.reload();
 
-        // reset global variables
-        global.cardsInShop = [];
-        global.cardsInPool = [];
-        player.cardsInPlay = [];
-        global.enemyPool = [];
+        // known bugs:
+
+            // health ui and combat buttons don't always toggle
+            // health and win checks aren't resetting
+
+        // graveyard:
+
+        // player1 = {};
+        // player1 = new Player('Player 1');
+        // const player = global.activePlayer;
+
+        // // reset global variables
+        // global.cardsInShop = [];
+        // global.cardsInPool = [];
+        // player.cardsInPlay = [];
+        // global.enemyPool = [];
         
-        // empty the dom cards
-        $('.card-container').remove();
+        // // empty the dom cards
+        // $('.card-container').remove();
 
 
-        // ui toggles - purposefully not resetting background image
-        func.toggleTitles();
-        func.toggleShopOn();
-        func.toggleCards();
-        func.updateTier();
-        func.updateCoins();
-
-        $('.player-2.card-row').addClass('hidden');
-
-        // also reset enemy card progress
-
+        // // ui toggles - purposefully not resetting background image
+        // func.toggleTitles();
+        // func.toggleShopOn();
+        // func.toggleCards();
+        // func.updateTier();
+        // func.updateCoins();
+        // $('.player-health').addClass('hidden');
+        // $('.go-to-combat').addClass('hidden');
+        // $('.player-2.card-row').addClass('hidden');
 
     },
 
