@@ -14,7 +14,6 @@ const global = {
         'orc-fortress',
         'realm',
         'flying-fortress',
-        'ancient-tree',
     ],
     enemyPool: [],
     enemyCards: [],
@@ -311,7 +310,8 @@ const func = {
         // check if player can buy more items - can always refresh tier
         if (global.activePlayer.coins < 3) {
             
-            return alert("you don't have enough coins!");
+            global.modalText = "you don't have enough coins!";
+            return func.updateModal();
         }
 
         // decrement player money
@@ -429,12 +429,16 @@ const func = {
 
         // check if player has enough money to upgrade
         if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
-            return (alert('not enough coins'));
+
+            global.modalText = "you don't have enough coins!"
+            return func.updateModal();
         };
 
         // check if player is already at tier 8
         if (global.activePlayer.currentTier >= 8) {
-            return (alert('you are already at the highest tier'));
+
+            global.modalText = 'You are already at the highest tier!';
+            return func.updateModal();
         }
 
         // decrement players coins
