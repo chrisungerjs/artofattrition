@@ -80,8 +80,8 @@ const func = {
         func.awardCoins()
         func.startBuyRound(global.activePlayer.currentTier);
 
-        // start tutorial
-        func.tutorial();
+        // start tutorial - disabled for now
+        // func.tutorial();
 
         // make enemy cards
         func.generateEnemies();
