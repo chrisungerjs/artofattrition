@@ -16,11 +16,11 @@
 
 - Art of Attrition was built entirely on the front-end with HTML, CSS, and JavaScript. Events and DOM manipulation are written in jQuery. I took a functional approach to constructing the core game logic, trying to leave my functions as open-ended as I could so that I can expand on game functionality in the future.
 
-  
+
+- For image compression, I used a combination of [iloveimg resizing tool](https://www.iloveimg.com/resize-image) followed by [tinypng image compressor](https://tinypng.com/) to process batches of multiple images at once. iloveimg has their own built-in compression tool if you're in a hurry, but I found tinypng resulted in both higher quality and smaller file sizes.
+
 
 - The function used to shuffle my card arrays is an implementation of the [Fisher-Yates Shuffle](https://bost.ocks.org/mike/shuffle/) algorithm, a simple and elegant way to ensure randomization.
-
-  
 
 ## Attributions
 
