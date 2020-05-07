@@ -80,6 +80,9 @@ const func = {
         func.awardCoins()
         func.startBuyRound(global.activePlayer.currentTier);
 
+        // start tutorial
+        func.tutorial();
+
         // make enemy cards
         func.generateEnemies();
         
@@ -258,6 +261,14 @@ const func = {
 
     },
 
+    tutorial() {
+        global.modalText = `
+            You start with 30 life. Don't let it get to 0. Buy any defender for 3 coins each.
+            You'll get more coins each round for killing enemies. When the going gets tough, upgrade your shop tier. Good luck.
+            `;
+        func.updateModal();
+    },
+
     //////////////////////////
     // Shop Functions
     //////////////////////////
@@ -427,11 +438,10 @@ const func = {
     // upgrade tier
     upgradeTier() {
 
-
         // check if player has enough money to upgrade
         if (global.activePlayer.coins < global.activePlayer.tierUpgradeCost) {
 
-            global.modalText = "you don't have enough coins!"
+            global.modalText = "You don't have enough coins!"
             return func.updateModal();
         };
 
@@ -620,8 +630,11 @@ const func = {
         for (let i = 0; i < enemyCards.length; i++) {
 
             global.activePlayer.health -= enemyCards[i].power;
-            $(`.enemy-${i}`).removeClass('bounce-top');
-            $(`.enemy-${i}`).addClass('bounce-top');
+            $(`#enemy-${i}`).removeClass('bounce-top');
+            setTimeout(() => {
+                $(`#enemy-${i}`).addClass('bounce-top');
+            }, 5);
+            $('.player-health').addClass('damaged');
             func.updateHealth();
         }
 
@@ -630,8 +643,9 @@ const func = {
             setTimeout(() => {
 
                 func.endCombatRound();
+                $('.player-health').removeClass('damaged');
 
-            }, 1000)
+            }, 50);
         
         } else {
 
@@ -751,19 +765,6 @@ const func = {
 
     },
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    },
-
-    //////////////////////////
-    // Tutorial
-    //////////////////////////
-    
-    startTutorial() {
-
-        
-    },
-
     //////////////////////////
     // UI Functions
     //////////////////////////
@@ -841,7 +842,7 @@ const func = {
     updateModal() {
 
         $('.modal-text').text(global.modalText);
-        $('.modal').toggleClass('hidden');
+        $('.modal').removeClass('hidden');
     },
     
 }        
