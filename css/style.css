@@ -854,18 +854,31 @@ html {
 
 
 
+
+.transition {
+    font-family: var(--titleFont);
+    font-size: 20vh;
+    font-weight: 900;
+    color: white;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: var(--shadow);
+}
+
+
+
+
+
+
+
 /* Animista Classes */
 
 /* cards in the store */
 .slide-in-right {
 	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-/* combat/shop transition */
-.slide-in-bck-center {
-	-webkit-animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 /* player cards in combat */
@@ -880,6 +893,7 @@ html {
 	        animation: bounce-top 0.9s both;
 }
 
+/* combat/shop transition */
 
 
 /* hide class for toggles */

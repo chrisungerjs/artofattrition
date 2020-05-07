@@ -19,6 +19,7 @@ const global = {
     enemyCards: [],
     currentEnemyTier: 1,
     modalText: '',
+    transitionText: '',
 
 }
 
@@ -264,6 +265,9 @@ const func = {
     // start buy round
     startBuyRound(tier) {
 
+        global.transitionText = 'shop';
+        func.updateTransition();
+
         $('.player-2.card-row').addClass('hidden');
 
         // empty the current pool - disabled for testing
@@ -471,6 +475,9 @@ const func = {
     // start combat phase // need to finish
     startCombat() {
 
+        global.transitionText = 'combat';
+        func.updateTransition();
+
         // toggle shop ui off
         func.toggleShopCombat();
 
@@ -510,7 +517,7 @@ const func = {
         setTimeout(() => {
 
             func.attackCard();
-        }, 1000);
+        }, 2000);
 
     },
 
@@ -738,6 +745,10 @@ const func = {
 
     },
 
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
     //////////////////////////
     // Tutorial
     //////////////////////////
@@ -750,6 +761,15 @@ const func = {
     //////////////////////////
     // UI Functions
     //////////////////////////
+
+    // update and show the transition message
+    updateTransition() {
+
+        $('.transition').text(global.transitionText).fadeIn('slow');
+        setTimeout(() => {
+            $('.transition').fadeOut();
+        }, 1000);
+    },
     
     // toggle start ui
     toggleTitles() {
@@ -817,15 +837,6 @@ const func = {
         $('.modal-text').text(global.modalText);
         $('.modal').toggleClass('hidden');
     },
-
-    //////////////////////////
-    // Animation Handlers
-    //////////////////////////
-    
-    animateShopCard() {
-
-    },
-    
     
 }        
 //////////////////////////
