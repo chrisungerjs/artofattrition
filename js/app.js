@@ -263,7 +263,7 @@ const func = {
 
     tutorial() {
         global.modalText = `
-            You start with 30 life. Don't let it get to 0. Buy any defender for 3 coins each.
+            You start with 30 life. Don't let it get to 0. Buy any defender for 3 coins.
             You'll get more coins each round for killing enemies. When the going gets tough, upgrade your shop tier. Good luck.
             `;
         func.updateModal();
