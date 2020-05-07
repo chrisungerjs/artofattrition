@@ -649,6 +649,12 @@ const func = {
         func.toggleShopCombat();
         func.awardCoins()
         global.activePlayer.tierUpgradeCost--;
+
+        // make sure update cost doesn't go below zero
+        if (global.activePlayer.tierUpgradeCost <= 0) {
+            global.activePlayer.tierUpgradeCost = 0;
+        }
+
         func.updateTier();
         func.startBuyRound(global.activePlayer.currentTier);
         return;
