@@ -780,30 +780,13 @@ html {
 
 
 
-/* mobile styles */
-
-@media (max-width: 850px) and (orientation: landscape) {
-
-    .play-btn {
-        font-size: 25vh;
-    }
-
-    .card-stat-row {
-        font-size: 1.5em;
-    }
-
-    .footer {
-        display: none;
-    }
-
-}
 
 .win-background {
-    background: var(--dimGradient), url(../img/win.png), var(--darkGradient), var(--darkGradient);
+    background: var(--dimGradient), url(../img/win/win.png), var(--darkGradient), var(--darkGradient);
 }
 
 .lose-background {
-    background: var(--dimGradient), url(../img/Siege.png), var(--darkGradient), var(--darkGradient);
+    background: var(--dimGradient), url(../img/lose/Siege.png), var(--darkGradient), var(--darkGradient);
 }
 
 .win-background,
@@ -877,24 +860,71 @@ html {
 
 /* cards in the store */
 .slide-in-right {
-	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 /* player cards in combat */
 .bounce-bottom {
-	-webkit-animation: bounce-bottom 0.9s both;
-	        animation: bounce-bottom 0.9s both;
+    -webkit-animation: bounce-bottom 0.9s both;
+    animation: bounce-bottom 0.9s both;
 }
 
 /* enemy cards in combat */
 .bounce-top {
-	-webkit-animation: bounce-top 0.9s both;
-	        animation: bounce-top 0.9s both;
+    -webkit-animation: bounce-top 0.9s both;
+    animation: bounce-top 0.9s both;
 }
 
-/* combat/shop transition */
+/* mobile styles */
 
+@media (max-width: 850px) and (orientation: landscape) {
+
+    html {
+        background-image: var(--dimGradient) ,url(../img/mobile/wizard-battle.png);
+    }
+    .castle {
+        background-image: var(--dimGradient), url(../img/mobile/castle.png);
+    }
+    .falls {
+        background-image: var(--dimGradient), url(../img/mobile/falls.png);
+    }
+    .guincho {
+        background-image: var(--dimGradient), url(../img/mobile/guincho.png);
+    }
+    .orc-fortress {
+        background-image: var(--dimGradient), url(../img/mobile/orc-fortress.png);
+    }
+    .realm {
+        background-image: var(--dimGradient), url(../img/mobile/realm.png);
+    }
+    .flying-fortress {
+        background-image: var(--dimGradient), url(../img/mobile/flying-fortress.png);
+    }
+    .ancient-tree {
+        background-image: var(--dimGradient), url(../img/mobile/ancient-tree.png);
+    }
+
+    .play-btn {
+        font-size: 25vh;
+    }
+
+    .card-stat-row {
+        font-size: 1.5em;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .win-background {
+        background: var(--dimGradient), url(../img/mobile/win.png), var(--darkGradient), var(--darkGradient);
+    }
+    
+    .lose-background {
+        background: var(--dimGradient), url(../img/mobile/Siege.png), var(--darkGradient), var(--darkGradient);
+    }
+}
 
 /* hide class for toggles */
 
