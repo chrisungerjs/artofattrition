@@ -160,14 +160,12 @@ const func = {
     makeshopCards(cardArray) {    
 
         // initialize counter for index IDs
-        let indexId = 0;
+        for (let i = 0; i < cardArray.length; i++) {
 
-        for (card in cardArray) {
-
-            const rarity = cardArray[card].rarity;
-            const tier = cardArray[card].tier;
-            const power = cardArray[card].power;
-            const health = cardArray[card].health; 
+            const rarity = cardArray[i].rarity;
+            const tier = cardArray[i].tier;
+            const power = cardArray[i].power;
+            const health = cardArray[i].health; 
 
             // add a utf star for each tier
             let tierStars = '';
@@ -189,16 +187,13 @@ const func = {
             }
            
             // make dom elements
-            const cardElement = func.makeCard(indexId, tier, power, health, rarity, tierStars);
+            const cardElement = func.makeCard(i, tier, power, health, rarity, tierStars);
 
             // add event listener 
             cardElement.on('click', (event) => func.buyCard(event));
             
             // append to the buy row
-            $('.buy').append(cardElement);
-
-            // increment counter
-            indexId++;
+            $('.buy').append((cardElement).addClass('slide-in-right'));
         }
     },
 
@@ -559,6 +554,17 @@ const func = {
         const $enemyCard = $(`#enemy-${randomEnemyId}`);
         const $enemyCardHealth = $(`#health-enemy-${randomEnemyId}.card-health`);
 
+        // apply animations to both cards in combat
+        $playerCard.removeClass('bounce-bottom');
+        setTimeout(() => {
+            $playerCard.addClass('bounce-bottom');
+        }, 5);
+        $enemyCard.removeClass('bounce-top');
+        setTimeout(() => {
+            $enemyCard.addClass('bounce-top');
+        }, 5);
+        
+
         // apply damage
         playerCardObj.health -= enemyCardObj.power;
         enemyCardObj.health -= playerCardObj.power;
@@ -567,11 +573,13 @@ const func = {
         // update health on the dom
         $playerCardHealth.text(playerCardObj.health).addClass('damaged')
         $enemyCardHealth.text(enemyCardObj.health).addClass('damaged')
-        
+
         // check if card dead and remove if so
         setTimeout(() => {
 
             if (enemyCardObj.health <= 0) {
+
+                $enemyCard.addClass('shake-horizontal');
                 
                 $enemyCard.remove();
                 global.activePlayer.coins += 2;
@@ -605,6 +613,8 @@ const func = {
         for (let i = 0; i < enemyCards.length; i++) {
 
             global.activePlayer.health -= enemyCards[i].power;
+            $(`.enemy-${i}`).removeClass('bounce-top');
+            $(`.enemy-${i}`).addClass('bounce-top');
             func.updateHealth();
         }
 
@@ -729,6 +739,15 @@ const func = {
     },
 
     //////////////////////////
+    // Tutorial
+    //////////////////////////
+    
+    startTutorial() {
+
+        
+    },
+
+    //////////////////////////
     // UI Functions
     //////////////////////////
     
@@ -798,6 +817,15 @@ const func = {
         $('.modal-text').text(global.modalText);
         $('.modal').toggleClass('hidden');
     },
+
+    //////////////////////////
+    // Animation Handlers
+    //////////////////////////
+    
+    animateShopCard() {
+
+    },
+    
     
 }        
 //////////////////////////

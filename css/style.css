@@ -1,6 +1,7 @@
 /* Imports */
 @import url('normalize.css');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url('animations.css');
 
 /* Variables */
 :root {
@@ -853,9 +854,31 @@ html {
 
 
 
+/* Animista Classes */
 
+/* cards in the store */
+.slide-in-right {
+	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
+/* combat/shop transition */
+.slide-in-bck-center {
+	-webkit-animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
+/* player cards in combat */
+.bounce-bottom {
+	-webkit-animation: bounce-bottom 0.9s both;
+	        animation: bounce-bottom 0.9s both;
+}
+
+/* enemy cards in combat */
+.bounce-top {
+	-webkit-animation: bounce-top 0.9s both;
+	        animation: bounce-top 0.9s both;
+}
 
 
 
